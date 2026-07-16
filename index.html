@@ -278,39 +278,66 @@ async function doSignup() {
 
 // ── DATA ───────────────────────────────────────
 async function loadData() {
+  // Show app immediately - never freeze
+  PROJECTS = []; TASKS = []; MEMBERS = [];
+  renderAll();
+  
+  // Then load data in background one by one
   try {
-    // Auto-create profile if missing
-    var profResult = await SB.from('profiles').select('id').eq('id', USER.id).maybeSingle();
-    if (!profResult.data) {
-      await SB.from('profiles').insert([{
-        id: USER.id,
-        name: (USER.user_metadata && USER.user_metadata.name) || USER.email.split('@')[0],
-        email: USER.email
-      }]);
-    }
+    // Step 1: ensure profile exists
+    try {
+      var pr = await Promise.race([
+        SB.from('profiles').select('id').eq('id', USER.id).maybeSingle(),
+        new Promise(function(_, reject) { setTimeout(function() { reject(new Error('timeout')); }, 5000); })
+      ]);
+      if (!pr.data) {
+        await SB.from('profiles').insert([{
+          id: USER.id,
+          name: (USER.user_metadata && USER.user_metadata.name) || USER.email.split('@')[0],
+          email: USER.email
+        }]);
+      }
+    } catch(e) { console.log('Profile step:', e.message); }
 
-    var projResult = await SB.from('projects').select('*').order('created_at');
-    var taskResult = await SB.from('tasks').select('*').order('created_at');
-    var membResult = await SB.from('profiles').select('id,name,email');
+    // Step 2: load projects
+    try {
+      var projResult = await Promise.race([
+        SB.from('projects').select('*').order('created_at'),
+        new Promise(function(_, reject) { setTimeout(function() { reject(new Error('timeout')); }, 5000); })
+      ]);
+      PROJECTS = projResult.data || [];
+      if (!ACTIVE_PROJECT && PROJECTS.length > 0) ACTIVE_PROJECT = PROJECTS[0].id;
+      renderAll();
+    } catch(e) { console.log('Projects step:', e.message); }
 
-    PROJECTS = projResult.data || [];
-    MEMBERS = membResult.data || [];
+    // Step 3: load tasks
+    try {
+      var taskResult = await Promise.race([
+        SB.from('tasks').select('*').order('created_at'),
+        new Promise(function(_, reject) { setTimeout(function() { reject(new Error('timeout')); }, 5000); })
+      ]);
+      TASKS = taskResult.data || [];
+      renderAll();
+    } catch(e) { console.log('Tasks step:', e.message); }
 
-    var memberMap = {};
-    MEMBERS.forEach(function(m) { memberMap[m.id] = m; });
+    // Step 4: load members
+    try {
+      var membResult = await Promise.race([
+        SB.from('profiles').select('id,name,email'),
+        new Promise(function(_, reject) { setTimeout(function() { reject(new Error('timeout')); }, 5000); })
+      ]);
+      MEMBERS = membResult.data || [];
+      var memberMap = {};
+      MEMBERS.forEach(function(m) { memberMap[m.id] = m; });
+      TASKS = TASKS.map(function(t) {
+        return Object.assign({}, t, { _assignee: memberMap[t.assignee_id] || null });
+      });
+      renderAll();
+    } catch(e) { console.log('Members step:', e.message); }
 
-    TASKS = (taskResult.data || []).map(function(t) {
-      return Object.assign({}, t, { _assignee: memberMap[t.assignee_id] || null });
-    });
-
-    if (!ACTIVE_PROJECT && PROJECTS.length > 0) ACTIVE_PROJECT = PROJECTS[0].id;
-
-    renderAll();
   } catch(e) {
     console.error('Load error:', e);
-    PROJECTS = []; TASKS = []; MEMBERS = [];
     renderAll();
-    toast('Note: ' + e.message);
   }
 }
 
