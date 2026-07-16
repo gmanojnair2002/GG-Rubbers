@@ -237,6 +237,15 @@ SB.auth.getSession().then(({ data: { session } }) => {
   if (!session) showPage('AUTH');
 });
 
+// Safety timeout - if still loading after 4 seconds, show login page
+setTimeout(function() {
+  var loading = document.getElementById('LOADING');
+  if (loading && loading.style.display !== 'none') {
+    console.log('Timeout - showing auth page');
+    showPage('AUTH');
+  }
+}, 4000);
+
 // ── AUTH ───────────────────────────────────────
 function switchTab(tab) {
   document.getElementById('form-in').style.display = tab === 'in' ? '' : 'none';
