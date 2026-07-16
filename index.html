@@ -114,7 +114,7 @@ textarea:focus{outline:none;border-color:#7F77DD}
 <body>
 
 <!-- AUTH PAGE -->
-<div id="AUTH" style="display:none">
+<div id="AUTH" style="display:block">
   <div class="auth-wrap">
     <div class="card">
       <div class="app-name">TaskFlow</div>
@@ -175,11 +175,7 @@ textarea:focus{outline:none;border-color:#7F77DD}
   </div>
 </div>
 
-<!-- LOADING -->
-<div id="LOADING" style="display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:12px;color:#aaa">
-  <div style="width:36px;height:36px;border:3px solid #ddd;border-top-color:#7F77DD;border-radius:50%;animation:spin .8s linear infinite"></div>
-  <p style="font-size:14px">Loading TaskFlow...</p>
-</div>
+<!-- LOADING REMOVED - AUTH shows immediately -->
 <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
 
 <div id="modal-root"></div>
@@ -215,7 +211,8 @@ const COLOR_NAMES = ['Purple','Teal','Coral','Blue','Pink','Amber'];
 
 // ── PAGES ──────────────────────────────────────
 function showPage(page) {
-  document.getElementById('LOADING').style.display = 'none';
+  var l = document.getElementById('LOADING');
+  if(l) l.style.display = 'none';
   document.getElementById('AUTH').style.display = page === 'AUTH' ? 'block' : 'none';
   document.getElementById('APP').style.display = page === 'APP' ? 'block' : 'none';
 }
@@ -236,15 +233,6 @@ SB.auth.onAuthStateChange(async (event, session) => {
 SB.auth.getSession().then(({ data: { session } }) => {
   if (!session) showPage('AUTH');
 });
-
-// Safety timeout - if still loading after 4 seconds, show login page
-setTimeout(function() {
-  var loading = document.getElementById('LOADING');
-  if (loading && loading.style.display !== 'none') {
-    console.log('Timeout - showing auth page');
-    showPage('AUTH');
-  }
-}, 4000);
 
 // ── AUTH ───────────────────────────────────────
 function switchTab(tab) {
