@@ -147,7 +147,6 @@ async function doLogin() {
   showSpinner(false);
   if (error) { showMsg(error.message, 'error'); return; }
   showMsg('Signed in! Loading your workspace...', 'success');
-  setTimeout(() => { window.location.href = 'https://neon-hamster-8ccd7b.netlify.app/app'; }, 1500);
 }
 
 async function doSignup() {
