@@ -353,7 +353,8 @@ function renderSidebar() {
   var activeProj = PROJECTS.find(function(p) { return p.id === ACTIVE_PROJECT; });
   var projItems = PROJECTS.map(function(p) {
     var count = TASKS.filter(function(t) { return t.project_id === p.id; }).length;
-    return '<div class="nav-btn' + (ACTIVE_PROJECT === p.id ? ' active' : '') + '" onclick="setProject('' + p.id + '')">' +
+    var cls = 'nav-btn' + (ACTIVE_PROJECT === p.id ? ' active' : '');
+    return '<div class="' + cls + '" onclick="setProject(\'' + p.id + '\')">' +
       '<span class="proj-dot" style="background:' + p.color + '"></span>' +
       '<span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(p.name) + '</span>' +
       '<span class="nav-count">' + count + '</span></div>';
