@@ -208,10 +208,10 @@ const CL=['#7F77DD','#1D9E75','#D85A30','#378ADD','#D4537E','#BA7517'];
 
 SB.auth.onAuthStateChange(async(_,s)=>{
   U=s?.user||null;
-  if(U){show('app');hide('auth');hide('splash');ub();await load();rt();}
-  else{show('auth');hide('app');hide('splash');}
+  if(U){g('app').style.display='';g('auth').style.display='none';g('splash').style.display='none';ub();await load();rt();}
+  else{g('auth').style.display='flex';g('app').style.display='none';g('splash').style.display='none';}
 });
-(async()=>{const{data:{session:s}}=await SB.auth.getSession();if(!s){hide('splash');show('auth');}})();
+(async()=>{const{data:{session:s}}=await SB.auth.getSession();if(!s){g('splash').style.display='none';g('auth').style.display='flex';}})();
 
 function st(t){
   g('fin').style.display=t==='in'?'':'none';
@@ -501,7 +501,7 @@ function dlCSV(){
 }
 
 function g(id){return document.getElementById(id)}
-function show(id){g(id).style.display='';}
+function show(id){var el=g(id);if(!el)return;el.style.display=id==='auth'?'flex':'';}  
 function hide(id){g(id).style.display='none';}
 function x(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 function cap(s){return s?s.charAt(0).toUpperCase()+s.slice(1):''}
