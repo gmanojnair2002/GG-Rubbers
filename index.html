@@ -87,6 +87,19 @@ var SB = supabase.createClient(
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im54eGxicm1iZG5nc2F1a2Nja3loIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1OTgzOTQsImV4cCI6MjA5NzE3NDM5NH0.aCjtYjPk7H6_YPE7ahz6DsZ-u06Etw6l17f5Ef1lZEw'
 );
 
+// Check if already logged in
+SB.auth.getSession().then(function(result) {
+  if (result.data && result.data.session) {
+    document.querySelector('.card').innerHTML = 
+      '<h1 style="color:#7F77DD">TaskFlow</h1>' +
+      '<div style="color:#aaa;font-size:12px;margin-bottom:1.5rem">G AND G RUBBERS</div>' +
+      '<div style="background:#E1F5EE;color:#085041;padding:14px;border-radius:8px;margin-bottom:16px;font-size:13px">'+
+      'You are logged in as <strong>' + result.data.session.user.email + '</strong></div>' +
+      '<a href="https://gmanojnair2002.github.io/GG-Rubbers/" style="display:block;width:100%;padding:13px;background:#7F77DD;color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:bold;text-align:center;text-decoration:none;margin-bottom:10px">Open TaskFlow App</a>' +
+      '<button onclick="SB.auth.signOut().then(function(){location.reload()})" style="width:100%;padding:10px;background:#FCEBEB;color:#c0392b;border:none;border-radius:8px;font-size:13px;cursor:pointer;font-family:Arial">Sign out</button>';
+  }
+});
+
 function showMsg(text, type) {
   var el = document.getElementById('msg');
   el.textContent = text;
@@ -140,8 +153,8 @@ document.getElementById('signin-btn').addEventListener('click', function() {
         document.getElementById('signin-btn').innerHTML = 'Sign in';
         document.getElementById('signin-btn').disabled = false;
       } else {
-        showMsg('Signed in! Opening your workspace...', 'ok');
-        window.location.href = 'https://gmanojnair2002.github.io/GG-Rubbers/app.html';
+        showMsg('Signed in! Reloading...', 'ok');
+        setTimeout(function() { window.location.reload(); }, 1200);
       }
     })
     .catch(function(err) {
@@ -167,9 +180,10 @@ document.getElementById('create-btn').addEventListener('click', function() {
         document.getElementById('create-btn').innerHTML = 'Create account';
         document.getElementById('create-btn').disabled = false;
       } else {
-        showMsg('Account created! You are now signed in. Opening workspace...', 'ok');
+        showMsg('Account created! Reloading...', 'ok');
+        setTimeout(function() { window.location.reload(); }, 1500);
         setTimeout(function() {
-          window.location.href = 'https://gmanojnair2002.github.io/GG-Rubbers/app.html';
+          showMsg('Signed in successfully! Loading...', 'ok');
         }, 1500);
       }
     })
