@@ -120,22 +120,22 @@ textarea:focus{outline:none;border-color:#7F77DD}
       <div class="app-name">TaskFlow</div>
       <div class="app-sub">G AND G RUBBERS</div>
       <div class="tabs">
-        <div class="tab active" id="tab-in" onclick="switchTab('in')">Sign in</div>
-        <div class="tab" id="tab-up" onclick="switchTab('up')">Create account</div>
+        <div class="tab active" id="tab-in">Sign in</div>
+        <div class="tab" id="tab-up">Create account</div>
       </div>
       <div class="msg-box" id="auth-msg"></div>
 
       <div id="form-in">
         <div class="field"><label>Email address</label><input type="email" id="in-email" placeholder="you@gmail.com"></div>
         <div class="field"><label>Password</label><input type="password" id="in-pass" placeholder="Your password"></div>
-        <button class="submit-btn" onclick="doLogin()">Sign in</button>
+        <button class="submit-btn" id="in-btn">Sign in</button>
       </div>
 
       <div id="form-up" style="display:none">
         <div class="field"><label>Your full name</label><input type="text" id="up-name" placeholder="e.g. Manoj Kumar"></div>
         <div class="field"><label>Email address</label><input type="email" id="up-email" placeholder="you@gmail.com"></div>
         <div class="field"><label>Password (minimum 6 characters)</label><input type="password" id="up-pass" placeholder="e.g. GGRubbers2026"></div>
-        <button class="submit-btn" onclick="doSignup()">Create account</button>
+        <button class="submit-btn" id="up-btn">Create account</button>
       </div>
     </div>
   </div>
@@ -672,6 +672,19 @@ function toast(msg) {
   document.getElementById('toast-area').appendChild(el);
   setTimeout(function() { el.remove(); }, 3000);
 }
+// Tab click handlers - avoid inline onclick quote issues
+document.addEventListener('DOMContentLoaded', function() {
+  var tabIn = document.getElementById('tab-in');
+  var tabUp = document.getElementById('tab-up');
+  var btnIn = document.getElementById('in-btn');
+  var btnUp = document.getElementById('up-btn');
+  
+  if(tabIn) tabIn.addEventListener('click', function() { switchTab('in'); });
+  if(tabUp) tabUp.addEventListener('click', function() { switchTab('up'); });
+  if(btnIn) btnIn.addEventListener('click', function() { doLogin(); });
+  if(btnUp) btnUp.addEventListener('click', function() { doSignup(); });
+});
+
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Enter') {
     var fin = document.getElementById('form-in');
