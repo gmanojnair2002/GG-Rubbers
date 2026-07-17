@@ -6,180 +6,66 @@
 <title>TaskFlow - G AND G RUBBERS</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,sans-serif;background:#f0f0f0;min-height:100vh}
-/* AUTH PAGE */
-.auth-wrap{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:1rem}
+body{font-family:Arial,sans-serif;background:#f0f0f0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1rem}
 .card{background:#fff;border-radius:12px;padding:2rem;width:100%;max-width:380px;box-shadow:0 4px 20px rgba(0,0,0,.12)}
-.app-name{font-size:24px;font-weight:bold;color:#7F77DD;margin-bottom:2px}
-.app-sub{font-size:12px;color:#aaa;margin-bottom:1.5rem}
+h1{color:#7F77DD;font-size:22px;font-weight:bold;margin-bottom:2px}
+.sub{color:#aaa;font-size:12px;margin-bottom:1.5rem}
 .tabs{display:flex;border-bottom:2px solid #eee;margin-bottom:1.25rem}
-.tab{flex:1;text-align:center;padding:9px;font-size:13px;cursor:pointer;color:#aaa;border-bottom:2px solid transparent;margin-bottom:-2px}
+.tab{flex:1;text-align:center;padding:9px;font-size:14px;cursor:pointer;color:#aaa;border-bottom:2px solid transparent;margin-bottom:-2px;user-select:none}
 .tab.active{color:#7F77DD;border-color:#7F77DD;font-weight:bold}
 .field{margin-bottom:14px}
-.field label{display:block;font-size:12px;color:#555;margin-bottom:5px;font-weight:bold}
-.field input{width:100%;padding:10px 12px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;font-family:Arial}
-.field input:focus{outline:none;border-color:#7F77DD}
-.submit-btn{width:100%;padding:12px;background:#7F77DD;color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:bold;cursor:pointer;margin-top:6px}
-.submit-btn:hover{background:#534AB7}
-.msg-box{padding:10px 12px;border-radius:8px;font-size:13px;margin-bottom:14px;display:none}
-.msg-box.error{background:#FCEBEB;color:#791F1F;display:block}
-.msg-box.success{background:#E1F5EE;color:#085041;display:block}
-/* APP PAGE */
-.app-wrap{display:flex;min-height:100vh}
-.sidebar{width:230px;background:#fff;border-right:1px solid #eee;display:flex;flex-direction:column;flex-shrink:0}
-.sb-head{padding:1rem;border-bottom:1px solid #eee}
-.sb-title{font-size:16px;font-weight:bold;color:#7F77DD}
-.sb-sub{font-size:11px;color:#aaa}
-.sb-nav{flex:1;padding:8px}
-.nav-btn{display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:8px;font-size:13px;cursor:pointer;color:#555;margin-bottom:2px}
-.nav-btn:hover{background:#f5f5f5}
-.nav-btn.active{background:#EEEDFE;color:#3C3489;font-weight:bold}
-.proj-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.nav-count{margin-left:auto;font-size:11px;background:#eee;color:#666;padding:1px 8px;border-radius:10px}
-.nav-btn.active .nav-count{background:#7F77DD;color:#fff}
-.sb-foot{padding:12px;border-top:1px solid #eee}
-.user-btn{display:flex;align-items:center;gap:8px;padding:8px;border-radius:8px;cursor:pointer}
-.user-btn:hover{background:#f5f5f5}
-.avatar{width:32px;height:32px;border-radius:50%;background:#7F77DD;color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:bold;flex-shrink:0}
-.main{flex:1;display:flex;flex-direction:column}
-.topbar{display:flex;align-items:center;gap:8px;padding:14px 20px;border-bottom:1px solid #eee;background:#fff}
-.topbar h1{font-size:16px;font-weight:bold;flex:1;color:#333}
-.action-btn{padding:7px 14px;border-radius:8px;font-size:13px;cursor:pointer;border:1.5px solid #ddd;background:#fff;color:#333;font-family:Arial}
-.action-btn:hover{background:#f5f5f5}
-.action-btn.primary{background:#7F77DD;border-color:#7F77DD;color:#fff}
-.action-btn.primary:hover{background:#534AB7}
-.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:20px}
-.stat-box{background:#fff;border:1px solid #eee;border-radius:10px;padding:14px}
-.stat-num{font-size:28px;font-weight:bold;line-height:1}
-.stat-lbl{font-size:11px;color:#aaa;margin-top:4px}
-.content{flex:1;padding:0 20px 20px}
-.filter-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
-.filter-row input,.filter-row select{font-family:Arial;font-size:13px;padding:6px 10px;border:1.5px solid #ddd;border-radius:8px;background:#fff;height:34px}
-.filter-row input{flex:1;min-width:120px}
-.view-switch{display:flex;border:1.5px solid #ddd;border-radius:8px;overflow:hidden}
-.view-switch button{border:none;padding:6px 12px;font-size:12px;background:#fff;cursor:pointer;font-family:Arial}
-.view-switch button.active{background:#EEEDFE;color:#3C3489;font-weight:bold}
-/* TASK LIST */
-.task-list{display:flex;flex-direction:column;gap:6px}
-.task-item{background:#fff;border:1.5px solid #eee;border-radius:10px;padding:12px 14px;display:flex;align-items:flex-start;gap:12px}
-.task-item:hover{border-color:#ccc}
-.task-check{width:20px;height:20px;border-radius:5px;border:2px solid #ccc;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:1px;font-size:12px;color:#fff}
-.task-check.done{background:#1D9E75;border-color:#1D9E75}
-.task-info{flex:1;min-width:0}
-.task-title{font-size:14px;line-height:1.4}
-.task-title.done{text-decoration:line-through;color:#aaa}
-.task-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;align-items:center}
-.tag{font-size:11px;padding:2px 8px;border-radius:10px}
-.tag-todo{background:#E6F1FB;color:#0C447C}
-.tag-progress{background:#EEEDFE;color:#3C3489}
-.tag-done{background:#E1F5EE;color:#085041}
-.tag-blocked{background:#FCEBEB;color:#791F1F}
-.tag-high{background:#FAECE7;color:#712B13}
-.tag-medium{background:#FAEEDA;color:#633806}
-.tag-low{background:#EAF3DE;color:#27500A}
-.tag-info{font-size:11px;color:#aaa}
-.task-btns{display:flex;gap:4px;flex-shrink:0}
-.task-btns button{border:none;background:transparent;cursor:pointer;padding:5px;border-radius:6px;font-size:15px}
-.task-btns button:hover{background:#f0f0f0}
-/* KANBAN */
-.kanban-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.k-col-head{font-size:12px;font-weight:bold;color:#666;padding:6px 4px 10px;display:flex;align-items:center;gap:6px}
-.k-col-dot{width:9px;height:9px;border-radius:50%}
-.k-col-count{font-size:11px;background:#eee;color:#666;padding:1px 7px;border-radius:10px}
-.k-col-body{background:#f5f5f5;border-radius:10px;padding:8px;min-height:120px;display:flex;flex-direction:column;gap:6px}
-.k-card{background:#fff;border:1.5px solid #eee;border-radius:8px;padding:10px 12px;cursor:pointer}
-.k-card:hover{border-color:#7F77DD}
-.k-card-title{font-size:13px;margin-bottom:8px;line-height:1.4}
-.k-card-tags{display:flex;gap:4px;flex-wrap:wrap}
-.empty-msg{text-align:center;padding:3rem 1rem;color:#aaa;font-size:14px}
-/* MODAL */
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;z-index:999;padding:1rem}
-.modal-box{background:#fff;border-radius:12px;padding:1.5rem;width:100%;max-width:440px;max-height:90vh;overflow-y:auto;box-shadow:0 10px 40px rgba(0,0,0,.2)}
-.modal-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem}
-.modal-hdr h3{font-size:16px;font-weight:bold}
-.modal-close{border:none;background:transparent;font-size:20px;cursor:pointer;color:#aaa;padding:2px 6px}
-.modal-ftr{display:flex;gap:8px;justify-content:flex-end;margin-top:1.25rem;padding-top:1rem;border-top:1px solid #eee}
-.modal-ftr button{padding:8px 16px;border-radius:8px;font-size:13px;cursor:pointer;border:1.5px solid #ddd;background:#fff;font-family:Arial}
-.modal-ftr button.save{background:#7F77DD;border-color:#7F77DD;color:#fff}
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-textarea{width:100%;font-family:Arial;font-size:13px;padding:9px 12px;border:1.5px solid #ddd;border-radius:8px;resize:vertical;min-height:70px}
-textarea:focus{outline:none;border-color:#7F77DD}
-/* TOAST */
-#toast-area{position:fixed;bottom:1.5rem;right:1.5rem;display:flex;flex-direction:column;gap:8px;z-index:9999}
-.toast-msg{background:#222;color:#fff;padding:10px 16px;border-radius:8px;font-size:13px;animation:fadeIn .2s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
-@media(max-width:700px){.sidebar{display:none}.stats-row{grid-template-columns:1fr 1fr}.kanban-grid{grid-template-columns:1fr}}
+.field label{display:block;font-size:13px;color:#555;margin-bottom:5px;font-weight:bold}
+.field input{width:100%;padding:11px 12px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;font-family:Arial;outline:none}
+.field input:focus{border-color:#7F77DD}
+.btn{width:100%;padding:13px;background:#7F77DD;color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:bold;cursor:pointer;margin-top:4px;font-family:Arial}
+.btn:hover{background:#534AB7}
+.msg{padding:11px 14px;border-radius:8px;font-size:13px;margin-bottom:14px;display:none;line-height:1.5}
+.msg.ok{background:#E1F5EE;color:#085041;display:block}
+.msg.err{background:#FCEBEB;color:#791F1F;display:block}
+.spinner{display:inline-block;width:16px;height:16px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px}
+@keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
+<div class="card">
+  <h1>TaskFlow</h1>
+  <div class="sub">G AND G RUBBERS</div>
 
-<!-- AUTH PAGE -->
-<div id="AUTH" style="display:block">
-  <div class="auth-wrap">
-    <div class="card">
-      <div class="app-name">TaskFlow</div>
-      <div class="app-sub">G AND G RUBBERS</div>
-      <div class="tabs">
-        <div class="tab active" id="tab-in">Sign in</div>
-        <div class="tab" id="tab-up">Create account</div>
-      </div>
-      <div class="msg-box" id="auth-msg"></div>
+  <div class="tabs">
+    <div class="tab active" id="tab-signin">Sign in</div>
+    <div class="tab" id="tab-create">Create account</div>
+  </div>
 
-      <div id="form-in">
-        <div class="field"><label>Email address</label><input type="email" id="in-email" placeholder="you@gmail.com"></div>
-        <div class="field"><label>Password</label><input type="password" id="in-pass" placeholder="Your password"></div>
-        <button class="submit-btn" id="in-btn">Sign in</button>
-      </div>
+  <div id="msg" class="msg"></div>
 
-      <div id="form-up" style="display:none">
-        <div class="field"><label>Your full name</label><input type="text" id="up-name" placeholder="e.g. Manoj Kumar"></div>
-        <div class="field"><label>Email address</label><input type="email" id="up-email" placeholder="you@gmail.com"></div>
-        <div class="field"><label>Password (minimum 6 characters)</label><input type="password" id="up-pass" placeholder="e.g. GGRubbers2026"></div>
-        <button class="submit-btn" id="up-btn">Create account</button>
-      </div>
+  <div id="signin-form">
+    <div class="field">
+      <label>Email address</label>
+      <input type="email" id="signin-email" placeholder="gmanojnair2002@gmail.com" value="gmanojnair2002@gmail.com">
     </div>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="signin-password" placeholder="Your password">
+    </div>
+    <button class="btn" id="signin-btn">Sign in</button>
+  </div>
+
+  <div id="create-form" style="display:none">
+    <div class="field">
+      <label>Your full name</label>
+      <input type="text" id="create-name" placeholder="e.g. Manoj Kumar">
+    </div>
+    <div class="field">
+      <label>Email address</label>
+      <input type="email" id="create-email" placeholder="gmanojnair2002@gmail.com" value="gmanojnair2002@gmail.com">
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="create-password" placeholder="GGRubbers2026">
+    </div>
+    <button class="btn" id="create-btn">Create account</button>
   </div>
 </div>
-
-<!-- APP PAGE -->
-<div id="APP" style="display:none">
-  <div class="app-wrap">
-    <aside class="sidebar">
-      <div class="sb-head">
-        <div class="sb-title">TaskFlow</div>
-        <div class="sb-sub">G AND G RUBBERS</div>
-      </div>
-      <div class="sb-nav" id="sb-nav">Loading...</div>
-      <div class="sb-foot">
-        <div class="user-btn" onclick="showUserMenu()">
-          <div class="avatar" id="user-avatar">?</div>
-          <div style="flex:1;min-width:0">
-            <div style="font-size:13px;font-weight:bold;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" id="user-name">-</div>
-            <div style="font-size:11px;color:#aaa;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" id="user-email">-</div>
-          </div>
-        </div>
-      </div>
-    </aside>
-    <div class="main">
-      <div class="topbar">
-        <h1 id="page-title">All tasks</h1>
-        <button class="action-btn" onclick="exportCSV()">↓ Export CSV</button>
-        <button class="action-btn primary" onclick="openTaskModal()">+ Add task</button>
-      </div>
-      <div class="stats-row" id="stats-row"></div>
-      <div class="content">
-        <div class="filter-row" id="filter-row"></div>
-        <div id="task-view"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- LOADING REMOVED - AUTH shows immediately -->
-<style>@keyframes spin{to{transform:rotate(360deg)}}</style>
-
-<div id="modal-root"></div>
-<div id="toast-area"></div>
 
 <script>
 var supabase=(function(e){function t(e,t){var n={};for(var r in e)Object.prototype.hasOwnProperty.call(e,r)&&t.indexOf(r)<0&&(n[r]=e[r]);if(e!=null&&typeof Object.getOwnPropertySymbols==`function`)for(var i=0,r=Object.getOwnPropertySymbols(e);i<r.length;i++)t.indexOf(r[i])<0&&Object.prototype.propertyIsEnumerable.call(e,r[i])&&(n[r[i]]=e[r[i]]);return n}function n(e,t,n,r){function i(e){return e instanceof n?e:new n(function(t){t(e)})}return new(n||=Promise)(function(n,a){function o(e){try{c(r.next(e))}catch(e){a(e)}}function s(e){try{c(r.throw(e))}catch(e){a(e)}}function c(e){e.done?n(e.value):i(e.value).then(o,s)}c((r=r.apply(e,t||[])).next())})}let r=e=>e?(...t)=>e(...t):(...e)=>fetch(...e);var i=class extends Error{constructor(e,t=`FunctionsError`,n){super(e),this.name=t,this.context=n}toJSON(){return{name:this.name,message:this.message,context:this.context}}},a=class extends i{constructor(e){super(`Failed to send a request to the Edge Function`,`FunctionsFetchError`,e)}},o=class extends i{constructor(e){super(`Relay Error invoking the Edge Function`,`FunctionsRelayError`,e)}},s=class extends i{constructor(e){super(`Edge Function returned a non-2xx status code`,`FunctionsHttpError`,e)}},c;(function(e){e.Any=`any`,e.ApNortheast1=`ap-northeast-1`,e.ApNortheast2=`ap-northeast-2`,e.ApSouth1=`ap-south-1`,e.ApSoutheast1=`ap-southeast-1`,e.ApSoutheast2=`ap-southeast-2`,e.CaCentral1=`ca-central-1`,e.EuCentral1=`eu-central-1`,e.EuWest1=`eu-west-1`,e.EuWest2=`eu-west-2`,e.EuWest3=`eu-west-3`,e.SaEast1=`sa-east-1`,e.UsEast1=`us-east-1`,e.UsWest1=`us-west-1`,e.UsWest2=`us-west-2`})(c||={});var l=class{constructor(e,{headers:t={},customFetch:n,region:i=c.Any}={}){this.url=e,this.headers=t,this.region=i,this.fetch=r(n)}setAuth(e){this.headers.Authorization=`Bearer ${e}`}invoke(e){return n(this,arguments,void 0,function*(e,t={}){let n,r;try{let{headers:i,method:c,body:l,signal:u,timeout:d}=t,f={},{region:p}=t;p||=this.region;let m=new URL(`${this.url}/${e}`);p&&p!==`any`&&(f[`x-region`]=p,m.searchParams.set(`forceFunctionRegion`,p));let h,ee=!!i&&Object.keys(i).some(e=>e.toLowerCase()===`content-type`);l&&!ee?typeof Blob<`u`&&l instanceof Blob||l instanceof ArrayBuffer?(f[`Content-Type`]=`application/octet-stream`,h=l):typeof l==`string`?(f[`Content-Type`]=`text/plain`,h=l):typeof FormData<`u`&&l instanceof FormData?h=l:(f[`Content-Type`]=`application/json`,h=JSON.stringify(l)):h=l&&typeof l!=`string`&&!(typeof Blob<`u`&&l instanceof Blob)&&!(l instanceof ArrayBuffer)&&!(typeof FormData<`u`&&l instanceof FormData)?JSON.stringify(l):l;let te=u;d&&(r=new AbortController,n=setTimeout(()=>r.abort(),d),u?(te=r.signal,u.addEventListener(`abort`,()=>r.abort())):te=r.signal);let g=yield this.fetch(m.toString(),{method:c||`POST`,headers:Object.assign(Object.assign(Object.assign({},f),this.headers),i),body:h,signal:te}).catch(e=>{throw new a(e)}),_=g.headers.get(`x-relay-error`);if(_&&_===`true`)throw new o(g);if(!g.ok)throw new s(g);let v=(g.headers.get(`Content-Type`)??`text/plain`).split(`;`)[0].trim(),y;return y=v===`application/json`?yield g.json():v===`application/octet-stream`||v===`application/pdf`?yield g.blob():v===`text/event-stream`?g:v===`multipart/form-data`?yield g.formData():yield g.text(),{data:y,error:null,response:g}}catch(e){return{data:null,error:e,response:e instanceof s||e instanceof o?e.context:void 0}}finally{n&&clearTimeout(n)}})}};let u=e=>Math.min(1e3*2**e,3e4),d=[520,503],f=[`GET`,`HEAD`,`OPTIONS`];var p=class extends Error{constructor(e){super(e.message),this.name=`PostgrestError`,this.details=e.details,this.hint=e.hint,this.code=e.code}toJSON(){return{name:this.name,message:this.message,details:this.details,hint:this.hint,code:this.code}}};function m(e,t){return new Promise(n=>{if(t?.aborted){n();return}let r=setTimeout(()=>{t?.removeEventListener(`abort`,i),n()},e);function i(){clearTimeout(r),n()}t?.addEventListener(`abort`,i)})}function h(e,t,n,r){return!(!r||n>=3||!f.includes(e)||!d.includes(t))}var ee=class{constructor(e){this.shouldThrowOnError=!1,this.retryEnabled=!0,this.method=e.method,this.url=e.url,this.headers=new Headers(e.headers),this.schema=e.schema,this.body=e.body,this.shouldThrowOnError=e.shouldThrowOnError??!1,this.signal=e.signal,this.isMaybeSingle=e.isMaybeSingle??!1,this.shouldStripNulls=e.shouldStripNulls??!1,this.urlLengthLimit=e.urlLengthLimit??8e3,this.retryEnabled=e.retry??!0,e.fetch?this.fetch=e.fetch:this.fetch=fetch}throwOnError(){return this.shouldThrowOnError=!0,this}stripNulls(){if(this.headers.get(`Accept`)===`text/csv`)throw Error(`stripNulls() cannot be used with csv()`);return this.shouldStripNulls=!0,this}setHeader(e,t){return this.headers=new Headers(this.headers),this.headers.set(e,t),this}retry(e){return this.retryEnabled=e,this}then(e,t){var n=this;if(this.schema===void 0||([`GET`,`HEAD`].includes(this.method)?this.headers.set(`Accept-Profile`,this.schema):this.headers.set(`Content-Profile`,this.schema)),this.method!==`GET`&&this.method!==`HEAD`&&this.headers.set(`Content-Type`,`application/json`),this.shouldStripNulls){let e=this.headers.get(`Accept`);e===`application/vnd.pgrst.object+json`?this.headers.set(`Accept`,`application/vnd.pgrst.object+json;nulls=stripped`):(!e||e===`application/json`)&&this.headers.set(`Accept`,`application/vnd.pgrst.array+json;nulls=stripped`)}let r=this.fetch,i=(async()=>{let e=0;for(;;){let t={};n.headers.forEach((e,n)=>{t[n]=e}),e>0&&(t[`X-Retry-Count`]=String(e));let i;try{i=await r(n.url.toString(),{method:n.method,headers:t,body:JSON.stringify(n.body,(e,t)=>typeof t==`bigint`?t.toString():t),signal:n.signal})}catch(t){if(t?.name===`AbortError`||t?.code===`ABORT_ERR`||!f.includes(n.method))throw t;if(n.retryEnabled&&e<3){let t=u(e);e++,await m(t,n.signal);continue}throw t}if(h(n.method,i.status,e,n.retryEnabled)){let t=i.headers?.get(`Retry-After`)??null,r=t===null?u(e):Math.max(0,parseInt(t,10)||0)*1e3;await i.text(),e++,await m(r,n.signal);continue}return await n.processResponse(i)}})();return this.shouldThrowOnError||(i=i.catch(e=>{let t=``,n=``,r=``,i=e?.cause;if(i){let n=i?.message??``,r=i?.code??``;t=`${e?.name??`FetchError`}: ${e?.message}`,t+=`\n\nCaused by: ${i?.name??`Error`}: ${n}`,r&&(t+=` (${r})`),i?.stack&&(t+=`\n${i.stack}`)}else t=e?.stack??``;let a=this.url.toString().length;return e?.name===`AbortError`||e?.code===`ABORT_ERR`?(r=``,n=`Request was aborted (timeout or manual cancellation)`,a>this.urlLengthLimit&&(n+=`. Note: Your request URL is ${a} characters, which may exceed server limits. If selecting many fields, consider using views. If filtering with large arrays (e.g., .in('id', [many IDs])), consider using an RPC function to pass values server-side.`)):(i?.name===`HeadersOverflowError`||i?.code===`UND_ERR_HEADERS_OVERFLOW`)&&(r=``,n=`HTTP headers exceeded server limits (typically 16KB)`,a>this.urlLengthLimit&&(n+=`. Your request URL is ${a} characters. If selecting many fields, consider using views. If filtering with large arrays (e.g., .in('id', [200+ IDs])), consider using an RPC function instead.`)),{success:!1,error:{message:`${e?.name??`FetchError`}: ${e?.message}`,details:t,hint:n,code:r},data:null,count:null,status:0,statusText:``}})),i.then(e,t)}async processResponse(e){var t=this;let n=null,r=null,i=null,a=e.status,o=e.statusText;if(e.ok){if(t.method!==`HEAD`){let i=await e.text();if(i!==``)if(t.headers.get(`Accept`)===`text/csv`)r=i;else if(t.headers.get(`Accept`)&&t.headers.get(`Accept`)?.includes(`application/vnd.pgrst.plan+text`))r=i;else try{r=JSON.parse(i)}catch{if(n={message:i},r=null,t.shouldThrowOnError)throw new p({message:i,details:``,hint:``,code:``})}}let s=t.headers.get(`Prefer`)?.match(/count=(exact|planned|estimated)/),c=e.headers.get(`content-range`)?.split(`/`);s&&c&&c.length>1&&(i=parseInt(c[1])),t.isMaybeSingle&&Array.isArray(r)&&(r.length>1?(n={code:`PGRST116`,details:`Results contain ${r.length} rows, application/vnd.pgrst.object+json requires 1 row`,hint:null,message:`JSON object requested, multiple (or no) rows returned`},r=null,i=null,a=406,o=`Not Acceptable`):r=r.length===1?r[0]:null)}else{let i=await e.text();try{n=JSON.parse(i),Array.isArray(n)&&e.status===404&&(r=[],n=null,a=200,o=`OK`)}catch{e.status===404&&i===``?(a=204,o=`No Content`):n={message:i}}if(n&&t.shouldThrowOnError)throw new p(n)}return{success:n===null,error:n,data:r,count:i,status:a,statusText:o}}returns(){return this}overrideTypes(){return this}},te=class extends ee{throwOnError(){return super.throwOnError()}select(e){let t=!1,n=(e??`*`).split(``).map(e=>/\s/.test(e)&&!t?``:(e===`"`&&(t=!t),e)).join(``);return this.url.searchParams.set(`select`,n),this.headers.append(`Prefer`,`return=representation`),this}order(e,{ascending:t=!0,nullsFirst:n,foreignTable:r,referencedTable:i=r}={}){let a=i?`${i}.order`:`order`,o=this.url.searchParams.get(a);return this.url.searchParams.set(a,`${o?`${o},`:``}${e}.${t?`asc`:`desc`}${n===void 0?``:n?`.nullsfirst`:`.nullslast`}`),this}limit(e,{foreignTable:t,referencedTable:n=t}={}){let r=n===void 0?`limit`:`${n}.limit`;return this.url.searchParams.set(r,`${e}`),this}range(e,t,{foreignTable:n,referencedTable:r=n}={}){let i=r===void 0?`offset`:`${r}.offset`,a=r===void 0?`limit`:`${r}.limit`;return this.url.searchParams.set(i,`${e}`),this.url.searchParams.set(a,`${t-e+1}`),this}abortSignal(e){return this.signal=e,this}single(){return this.headers.set(`Accept`,`application/vnd.pgrst.object+json`),this}maybeSingle(){return this.isMaybeSingle=!0,this}csv(){return this.headers.set(`Accept`,`text/csv`),this}geojson(){return this.headers.set(`Accept`,`application/geo+json`),this}explain({analyze:e=!1,verbose:t=!1,settings:n=!1,buffers:r=!1,wal:i=!1,format:a=`text`}={}){let o=[e?`analyze`:null,t?`verbose`:null,n?`settings`:null,r?`buffers`:null,i?`wal`:null].filter(Boolean).join(`|`),s=this.headers.get(`Accept`)??`application/json`;return this.headers.set(`Accept`,`application/vnd.pgrst.plan+${a}; for="${s}"; options=${o};`),this}rollback(){return this.headers.append(`Prefer`,`tx=rollback`),this}returns(){return this}maxAffected(e){return this.headers.append(`Prefer`,`handling=strict`),this.headers.append(`Prefer`,`max-affected=${e}`),this}};let g=RegExp(`[,()]`);var _=class extends te{throwOnError(){return super.throwOnError()}eq(e,t){return this.url.searchParams.append(e,`eq.${t}`),this}neq(e,t){return this.url.searchParams.append(e,`neq.${t}`),this}gt(e,t){return this.url.searchParams.append(e,`gt.${t}`),this}gte(e,t){return this.url.searchParams.append(e,`gte.${t}`),this}lt(e,t){return this.url.searchParams.append(e,`lt.${t}`),this}lte(e,t){return this.url.searchParams.append(e,`lte.${t}`),this}like(e,t){return this.url.searchParams.append(e,`like.${t}`),this}likeAllOf(e,t){return this.url.searchParams.append(e,`like(all).{${t.join(`,`)}}`),this}likeAnyOf(e,t){return this.url.searchParams.append(e,`like(any).{${t.join(`,`)}}`),this}ilike(e,t){return this.url.searchParams.append(e,`ilike.${t}`),this}ilikeAllOf(e,t){return this.url.searchParams.append(e,`ilike(all).{${t.join(`,`)}}`),this}ilikeAnyOf(e,t){return this.url.searchParams.append(e,`ilike(any).{${t.join(`,`)}}`),this}regexMatch(e,t){return this.url.searchParams.append(e,`match.${t}`),this}regexIMatch(e,t){return this.url.searchParams.append(e,`imatch.${t}`),this}is(e,t){return this.url.searchParams.append(e,`is.${t}`),this}isDistinct(e,t){return this.url.searchParams.append(e,`isdistinct.${t}`),this}in(e,t){let n=Array.from(new Set(t)).map(e=>typeof e==`string`&&g.test(e)?`"${e}"`:`${e}`).join(`,`);return this.url.searchParams.append(e,`in.(${n})`),this}notIn(e,t){let n=Array.from(new Set(t)).map(e=>typeof e==`string`&&g.test(e)?`"${e}"`:`${e}`).join(`,`);return this.url.searchParams.append(e,`not.in.(${n})`),this}contains(e,t){return typeof t==`string`?this.url.searchParams.append(e,`cs.${t}`):Array.isArray(t)?this.url.searchParams.append(e,`cs.{${t.join(`,`)}}`):this.url.searchParams.append(e,`cs.${JSON.stringify(t)}`),this}containedBy(e,t){return typeof t==`string`?this.url.searchParams.append(e,`cd.${t}`):Array.isArray(t)?this.url.searchParams.append(e,`cd.{${t.join(`,`)}}`):this.url.searchParams.append(e,`cd.${JSON.stringify(t)}`),this}rangeGt(e,t){return this.url.searchParams.append(e,`sr.${t}`),this}rangeGte(e,t){return this.url.searchParams.append(e,`nxl.${t}`),this}rangeLt(e,t){return this.url.searchParams.append(e,`sl.${t}`),this}rangeLte(e,t){return this.url.searchParams.append(e,`nxr.${t}`),this}rangeAdjacent(e,t){return this.url.searchParams.append(e,`adj.${t}`),this}overlaps(e,t){return typeof t==`string`?this.url.searchParams.append(e,`ov.${t}`):this.url.searchParams.append(e,`ov.{${t.join(`,`)}}`),this}textSearch(e,t,{config:n,type:r}={}){let i=``;r===`plain`?i=`pl`:r===`phrase`?i=`ph`:r===`websearch`&&(i=`w`);let a=n===void 0?``:`(${n})`;return this.url.searchParams.append(e,`${i}fts${a}.${t}`),this}match(e){return Object.entries(e).filter(([e,t])=>t!==void 0).forEach(([e,t])=>{this.url.searchParams.append(e,`eq.${t}`)}),this}not(e,t,n){return this.url.searchParams.append(e,`not.${t}.${n}`),this}or(e,{foreignTable:t,referencedTable:n=t}={}){let r=n?`${n}.or`:`or`;return this.url.searchParams.append(r,`(${e})`),this}filter(e,t,n){return this.url.searchParams.append(e,`${t}.${n}`),this}},v=class{constructor(e,{headers:t={},schema:n,fetch:r,urlLengthLimit:i=8e3,retry:a}){this.url=e,this.headers=new Headers(t),this.schema=n,this.fetch=r,this.urlLengthLimit=i,this.retry=a}cloneRequestState(){return{url:new URL(this.url.toString()),headers:new Headers(this.headers)}}select(e,t){let{head:n=!1,count:r}=t??{},i=n?`HEAD`:`GET`,a=!1,o=(e??`*`).split(``).map(e=>/\s/.test(e)&&!a?``:(e===`"`&&(a=!a),e)).join(``),{url:s,headers:c}=this.cloneRequestState();return s.searchParams.set(`select`,o),r&&c.append(`Prefer`,`count=${r}`),new _({method:i,url:s,headers:c,schema:this.schema,fetch:this.fetch,urlLengthLimit:this.urlLengthLimit,retry:this.retry})}insert(e,{count:t,defaultToNull:n=!0}={}){let{url:r,headers:i}=this.cloneRequestState();if(t&&i.append(`Prefer`,`count=${t}`),n||i.append(`Prefer`,`missing=default`),Array.isArray(e)){let t=e.reduce((e,t)=>e.concat(Object.keys(t)),[]);if(t.length>0){let e=[...new Set(t)].map(e=>`"${e}"`);r.searchParams.set(`columns`,e.join(`,`))}}return new _({method:`POST`,url:r,headers:i,schema:this.schema,body:e,fetch:this.fetch??fetch,urlLengthLimit:this.urlLengthLimit,retry:this.retry})}upsert(e,{onConflict:t,ignoreDuplicates:n=!1,count:r,defaultToNull:i=!0}={}){let{url:a,headers:o}=this.cloneRequestState();if(o.append(`Prefer`,`resolution=${n?`ignore`:`merge`}-duplicates`),t!==void 0&&a.searchParams.set(`on_conflict`,t),r&&o.append(`Prefer`,`count=${r}`),i||o.append(`Prefer`,`missing=default`),Array.isArray(e)){let t=e.reduce((e,t)=>e.concat(Object.keys(t)),[]);if(t.length>0){let e=[...new Set(t)].map(e=>`"${e}"`);a.searchParams.set(`columns`,e.join(`,`))}}return new _({method:`POST`,url:a,headers:o,schema:this.schema,body:e,fetch:this.fetch??fetch,urlLengthLimit:this.urlLengthLimit,retry:this.retry})}update(e,{count:t}={}){let{url:n,headers:r}=this.cloneRequestState();return t&&r.append(`Prefer`,`count=${t}`),new _({method:`PATCH`,url:n,headers:r,schema:this.schema,body:e,fetch:this.fetch??fetch,urlLengthLimit:this.urlLengthLimit,retry:this.retry})}delete({count:e}={}){let{url:t,headers:n}=this.cloneRequestState();return e&&n.append(`Prefer`,`count=${e}`),new _({method:`DELETE`,url:t,headers:n,schema:this.schema,fetch:this.fetch??fetch,urlLengthLimit:this.urlLengthLimit,retry:this.retry})}};function y(e){"@babel/helpers - typeof";return y=typeof Symbol==`function`&&typeof Symbol.iterator==`symbol`?function(e){return typeof e}:function(e){return e&&typeof Symbol==`function`&&e.constructor===Symbol&&e!==Symbol.prototype?`symbol`:typeof e},y(e)}function ne(e,t){if(y(e)!=`object`||!e)return e;var n=e[Symbol.toPrimitive];if(n!==void 0){var r=n.call(e,t||`default`);if(y(r)!=`object`)return r;throw TypeError(`@@toPrimitive must return a primitive value.`)}return(t===`string`?String:Number)(e)}function re(e){var t=ne(e,`string`);return y(t)==`symbol`?t:t+``}function ie(e,t,n){return(t=re(t))in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function ae(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter(function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable})),n.push.apply(n,r)}return n}function oe(e){for(var t=1;t<arguments.length;t++){var n=arguments[t]==null?{}:arguments[t];t%2?ae(Object(n),!0).forEach(function(t){ie(e,t,n[t])}):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):ae(Object(n)).forEach(function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))})}return e}var se=class e{constructor(e,{headers:t={},schema:n,fetch:r,timeout:i,urlLengthLimit:a=8e3,retry:o}={}){this.url=e,this.headers=new Headers(t),this.schemaName=n,this.urlLengthLimit=a;let s=r??globalThis.fetch;i!==void 0&&i>0?this.fetch=(e,t)=>{let n=new AbortController,r=setTimeout(()=>n.abort(),i),a=t?.signal;if(a){if(a.aborted)return clearTimeout(r),s(e,t);let i=()=>{clearTimeout(r),n.abort()};return a.addEventListener(`abort`,i,{once:!0}),s(e,oe(oe({},t),{},{signal:n.signal})).finally(()=>{clearTimeout(r),a.removeEventListener(`abort`,i)})}return s(e,oe(oe({},t),{},{signal:n.signal})).finally(()=>clearTimeout(r))}:this.fetch=s,this.retry=o}from(e){if(!e||typeof e!=`string`||e.trim()===``)throw Error(`Invalid relation name: relation must be a non-empty string.`);return new v(new URL(`${this.url}/${e}`),{headers:new Headers(this.headers),schema:this.schemaName,fetch:this.fetch,urlLengthLimit:this.urlLengthLimit,retry:this.retry})}schema(t){return new e(this.url,{headers:this.headers,schema:t,fetch:this.fetch,urlLengthLimit:this.urlLengthLimit,retry:this.retry})}rpc(e,t={},{head:n=!1,get:r=!1,count:i}={}){let a,o=new URL(`${this.url}/rpc/${e}`),s,c=e=>typeof e==`object`&&!!e&&(!Array.isArray(e)||e.some(c)),l=n&&Object.values(t).some(c);l?(a=`POST`,s=t):n||r?(a=n?`HEAD`:`GET`,Object.entries(t).filter(([e,t])=>t!==void 0).map(([e,t])=>[e,Array.isArray(t)?`{${t.join(`,`)}}`:`${t}`]).forEach(([e,t])=>{o.searchParams.append(e,t)})):(a=`POST`,s=t);let u=new Headers(this.headers);return l?u.set(`Prefer`,i?`count=${i},return=minimal`:`return=minimal`):i&&u.set(`Prefer`,`count=${i}`),new _({method:a,url:o,headers:u,schema:this.schemaName,body:s,fetch:this.fetch??fetch,urlLengthLimit:this.urlLengthLimit,retry:this.retry})}},ce=class{constructor(){}static detectEnvironment(){if(typeof WebSocket<`u`)return{type:`native`,wsConstructor:WebSocket};let e=globalThis;if(typeof globalThis<`u`&&e.WebSocket!==void 0)return{type:`native`,wsConstructor:e.WebSocket};let t=typeof global<`u`?global:void 0;if(t&&t.WebSocket!==void 0)return{type:`native`,wsConstructor:t.WebSocket};if(typeof globalThis<`u`&&e.WebSocketPair!==void 0&&globalThis.WebSocket===void 0)return{type:`cloudflare`,error:`Cloudflare Workers detected. WebSocket clients are not supported in Cloudflare Workers.`,workaround:`Use Cloudflare Workers WebSocket API for server-side WebSocket handling, or deploy to a different runtime.`};if(typeof globalThis<`u`&&e.EdgeRuntime||typeof navigator<`u`&&navigator.userAgent?.includes(`Vercel-Edge`))return{type:`unsupported`,error:`Edge runtime detected (Vercel Edge/Netlify Edge). WebSockets are not supported in edge functions.`,workaround:`Use serverless functions or a different deployment target for WebSocket functionality.`};let n=globalThis.process;if(n){let e=n.versions;if(e&&e.node)return{type:`unsupported`,error:`Node.js detected but native WebSocket not found.`,workaround:`Ensure you are running Node.js 22+ or provide a WebSocket implementation via the transport option.`}}return{type:`unsupported`,error:`Unknown JavaScript runtime without WebSocket support.`,workaround:`Ensure you're running in a supported environment (browser, Node.js, Deno) or provide a custom WebSocket implementation.`}}static getWebSocketConstructor(){let e=this.detectEnvironment();if(e.wsConstructor)return e.wsConstructor;let t=e.error||`WebSocket not supported in this environment.`;throw e.workaround&&(t+=`\n\nSuggested solution: ${e.workaround}`),Error(t)}static isWebSocketSupported(){try{return this.detectEnvironment().type===`native`}catch{return!1}}};let b={closed:`closed`,errored:`errored`,joined:`joined`,joining:`joining`,leaving:`leaving`},le={close:`phx_close`,error:`phx_error`,join:`phx_join`,reply:`phx_reply`,leave:`phx_leave`,access_token:`access_token`},ue={connecting:`connecting`,open:`open`,closing:`closing`,closed:`closed`};var de=class{constructor(e){this.HEADER_LENGTH=1,this.USER_BROADCAST_PUSH_META_LENGTH=6,this.KINDS={userBroadcastPush:3,userBroadcast:4},this.BINARY_ENCODING=0,this.JSON_ENCODING=1,this.BROADCAST_EVENT=`broadcast`,this.allowedMetadataKeys=[],this.allowedMetadataKeys=e??[]}encode(e,t){if(e.event===this.BROADCAST_EVENT&&!(e.payload instanceof ArrayBuffer)&&typeof e.payload.event==`string`)return t(this._binaryEncodeUserBroadcastPush(e));let n=[e.join_ref,e.ref,e.topic,e.event,e.payload];return t(JSON.stringify(n))}_binaryEncodeUserBroadcastPush(e){return this._isArrayBuffer(e.payload?.payload)?this._encodeBinaryUserBroadcastPush(e):this._encodeJsonUserBroadcastPush(e)}_encodeBinaryUserBroadcastPush(e){let t=e.payload?.payload??new ArrayBuffer(0);return this._encodeUserBroadcastPush(e,this.BINARY_ENCODING,t)}_encodeJsonUserBroadcastPush(e){let t=e.payload?.payload??{},n=new TextEncoder().encode(JSON.stringify(t)).buffer;return this._encodeUserBroadcastPush(e,this.JSON_ENCODING,n)}_encodeUserBroadcastPush(e,t,n){let r=new TextEncoder,i=r.encode(e.topic),a=r.encode(e.ref??``),o=r.encode(e.join_ref??``),s=r.encode(e.payload.event),c=this.allowedMetadataKeys?this._pick(e.payload,this.allowedMetadataKeys):{},l=r.encode(Object.keys(c).length===0?``:JSON.stringify(c));if(o.length>255)throw Error(`joinRef length ${o.length} exceeds maximum of 255`);if(a.length>255)throw Error(`ref length ${a.length} exceeds maximum of 255`);if(i.length>255)throw Error(`topic length ${i.length} exceeds maximum of 255`);if(s.length>255)throw Error(`userEvent length ${s.length} exceeds maximum of 255`);if(l.length>255)throw Error(`metadata length ${l.length} exceeds maximum of 255`);let u=this.USER_BROADCAST_PUSH_META_LENGTH+o.length+a.length+i.length+s.length+l.length,d=new ArrayBuffer(this.HEADER_LENGTH+u),f=new DataView(d),p=new Uint8Array(d),m=0;f.setUint8(m++,this.KINDS.userBroadcastPush),f.setUint8(m++,o.length),f.setUint8(m++,a.length),f.setUint8(m++,i.length),f.setUint8(m++,s.length),f.setUint8(m++,l.length),f.setUint8(m++,t),p.set(o,m),m+=o.length,p.set(a,m),m+=a.length,p.set(i,m),m+=i.length,p.set(s,m),m+=s.length,p.set(l,m),m+=l.length;var h=new Uint8Array(d.byteLength+n.byteLength);return h.set(new Uint8Array(d),0),h.set(new Uint8Array(n),d.byteLength),h.buffer}decode(e,t){if(this._isArrayBuffer(e))return t(this._binaryDecode(e));if(typeof e==`string`){let[n,r,i,a,o]=JSON.parse(e);return t({join_ref:n,ref:r,topic:i,event:a,payload:o})}return t({})}_binaryDecode(e){let t=new DataView(e),n=t.getUint8(0),r=new TextDecoder;switch(n){case this.KINDS.userBroadcast:return this._decodeUserBroadcast(e,t,r)}}_decodeUserBroadcast(e,t,n){let r=t.getUint8(1),i=t.getUint8(2),a=t.getUint8(3),o=t.getUint8(4),s=this.HEADER_LENGTH+4,c=n.decode(e.slice(s,s+r));s+=r;let l=n.decode(e.slice(s,s+i));s+=i;let u=n.decode(e.slice(s,s+a));s+=a;let d=e.slice(s,e.byteLength),f=o===this.JSON_ENCODING?JSON.parse(n.decode(d)):d,p={type:this.BROADCAST_EVENT,event:l,payload:f};return a>0&&(p.meta=JSON.parse(u)),{join_ref:null,ref:null,topic:c,event:this.BROADCAST_EVENT,payload:p}}_isArrayBuffer(e){return e instanceof ArrayBuffer||e?.constructor?.name===`ArrayBuffer`}_pick(e,t){return!e||typeof e!=`object`?{}:Object.fromEntries(Object.entries(e).filter(([e])=>t.includes(e)))}},x;(function(e){e.abstime=`abstime`,e.bool=`bool`,e.date=`date`,e.daterange=`daterange`,e.float4=`float4`,e.float8=`float8`,e.int2=`int2`,e.int4=`int4`,e.int4range=`int4range`,e.int8=`int8`,e.int8range=`int8range`,e.json=`json`,e.jsonb=`jsonb`,e.money=`money`,e.numeric=`numeric`,e.oid=`oid`,e.reltime=`reltime`,e.text=`text`,e.time=`time`,e.timestamp=`timestamp`,e.timestamptz=`timestamptz`,e.timetz=`timetz`,e.tsrange=`tsrange`,e.tstzrange=`tstzrange`})(x||={});let fe=(e,t,n={})=>{let r=n.skipTypes??[];return t?Object.keys(t).reduce((n,i)=>(n[i]=pe(i,e,t,r),n),{}):{}},pe=(e,t,n,r)=>{let i=t.find(t=>t.name===e)?.type,a=n[e];return i&&!r.includes(i)?me(i,a):he(a)},me=(e,t)=>{if(e.charAt(0)===`_`)return ye(t,e.slice(1,e.length));switch(e){case x.bool:return ge(t);case x.float4:case x.float8:case x.int2:case x.int4:case x.int8:case x.numeric:case x.oid:return _e(t);case x.json:case x.jsonb:return ve(t);case x.timestamp:return be(t);case x.abstime:case x.date:case x.daterange:case x.int4range:case x.int8range:case x.money:case x.reltime:case x.text:case x.time:case x.timestamptz:case x.timetz:case x.tsrange:case x.tstzrange:return he(t);default:return he(t)}},he=e=>e,ge=e=>{switch(e){case`t`:return!0;case`f`:return!1;default:return e}},_e=e=>{if(typeof e==`string`){let t=parseFloat(e);if(!Number.isNaN(t))return t}return e},ve=e=>{if(typeof e==`string`)try{return JSON.parse(e)}catch{return e}return e},ye=(e,t)=>{if(typeof e!=`string`)return e;let n=e.length-1,r=e[n];if(e[0]===`{`&&r===`}`){let r,i=e.slice(1,n);try{r=JSON.parse(`[`+i+`]`)}catch{r=i?i.split(`,`):[]}return r.map(e=>me(t,e))}return e},be=e=>typeof e==`string`?e.replace(` `,`T`):e,xe=e=>{let t=new URL(e);return t.protocol=t.protocol.replace(/^ws/i,`http`),t.pathname=t.pathname.replace(/\/+$/,``).replace(/\/socket\/websocket$/i,``).replace(/\/socket$/i,``).replace(/\/websocket$/i,``),t.pathname===``||t.pathname===`/`?t.pathname=`/api/broadcast`:t.pathname+=`/api/broadcast`,t.href};var Se=e=>typeof e==`function`?e:function(){return e},Ce=typeof self<`u`?self:null,S=typeof window<`u`?window:null,C=Ce||S||globalThis,we=`2.0.0`,Te=1e4,Ee=1e3,w={connecting:0,open:1,closing:2,closed:3},T={closed:`closed`,errored:`errored`,joined:`joined`,joining:`joining`,leaving:`leaving`},E={close:`phx_close`,error:`phx_error`,join:`phx_join`,reply:`phx_reply`,leave:`phx_leave`},De={longpoll:`longpoll`,websocket:`websocket`},Oe={complete:4},ke=`base64url.bearer.phx.`,Ae=class{constructor(e,t,n,r){this.channel=e,this.event=t,this.payload=n||function(){return{}},this.receivedResp=null,this.timeout=r,this.timeoutTimer=null,this.recHooks=[],this.sent=!1,this.ref=void 0}resend(e){this.timeout=e,this.reset(),this.send()}send(){this.hasReceived(`timeout`)||(this.startTimeout(),this.sent=!0,this.channel.socket.push({topic:this.channel.topic,event:this.event,payload:this.payload(),ref:this.ref,join_ref:this.channel.joinRef()}))}receive(e,t){return this.hasReceived(e)&&t(this.receivedResp.response),this.recHooks.push({status:e,callback:t}),this}reset(){this.cancelRefEvent(),this.ref=null,this.refEvent=null,this.receivedResp=null,this.sent=!1}destroy(){this.cancelRefEvent(),this.cancelTimeout()}matchReceive({status:e,response:t,_ref:n}){this.recHooks.filter(t=>t.status===e).forEach(e=>e.callback(t))}cancelRefEvent(){this.refEvent&&this.channel.off(this.refEvent)}cancelTimeout(){clearTimeout(this.timeoutTimer),this.timeoutTimer=null}startTimeout(){this.timeoutTimer&&this.cancelTimeout(),this.ref=this.channel.socket.makeRef(),this.refEvent=this.channel.replyEventName(this.ref),this.channel.on(this.refEvent,e=>{this.cancelRefEvent(),this.cancelTimeout(),this.receivedResp=e,this.matchReceive(e)}),this.timeoutTimer=setTimeout(()=>{this.trigger(`timeout`,{})},this.timeout)}hasReceived(e){return this.receivedResp&&this.receivedResp.status===e}trigger(e,t){this.channel.trigger(this.refEvent,{status:e,response:t})}},je=class{constructor(e,t){this.callback=e,this.timerCalc=t,this.timer=void 0,this.tries=0}reset(){this.tries=0,clearTimeout(this.timer)}scheduleTimeout(){clearTimeout(this.timer),this.timer=setTimeout(()=>{this.tries+=1,this.callback()},this.timerCalc(this.tries+1))}},Me=class{constructor(e,t,n){this.state=T.closed,this.topic=e,this.params=Se(t||{}),this.socket=n,this.bindings=[],this.bindingRef=0,this.timeout=this.socket.timeout,this.joinedOnce=!1,this.joinPush=new Ae(this,E.join,this.params,this.timeout),this.pushBuffer=[],this.stateChangeRefs=[],this.rejoinTimer=new je(()=>{this.socket.isConnected()&&this.rejoin()},this.socket.rejoinAfterMs),this.stateChangeRefs.push(this.socket.onError(()=>this.rejoinTimer.reset())),this.stateChangeRefs.push(this.socket.onOpen(()=>{this.rejoinTimer.reset(),this.isErrored()&&this.rejoin()})),this.joinPush.receive(`ok`,()=>{this.state=T.joined,this.rejoinTimer.reset(),this.pushBuffer.forEach(e=>e.send()),this.pushBuffer=[]}),this.joinPush.receive(`error`,e=>{this.state=T.errored,this.socket.hasLogger()&&this.socket.log(`channel`,`error ${this.topic}`,e),this.socket.isConnected()&&this.rejoinTimer.scheduleTimeout()}),this.onClose(()=>{this.rejoinTimer.reset(),this.socket.hasLogger()&&this.socket.log(`channel`,`close ${this.topic}`),this.state=T.closed,this.socket.remove(this)}),this.onError(e=>{this.socket.hasLogger()&&this.socket.log(`channel`,`error ${this.topic}`,e),this.isJoining()&&this.joinPush.reset(),this.state=T.errored,this.socket.isConnected()&&this.rejoinTimer.scheduleTimeout()}),this.joinPush.receive(`timeout`,()=>{this.socket.hasLogger()&&this.socket.log(`channel`,`timeout ${this.topic}`,this.joinPush.timeout),new Ae(this,E.leave,Se({}),this.timeout).send(),this.state=T.errored,this.joinPush.reset(),this.socket.isConnected()&&this.rejoinTimer.scheduleTimeout()}),this.on(E.reply,(e,t)=>{this.trigger(this.replyEventName(t),e)})}join(e=this.timeout){if(this.joinedOnce)throw Error(`tried to join multiple times. 'join' can only be called a single time per channel instance`);return this.timeout=e,this.joinedOnce=!0,this.rejoin(),this.joinPush}teardown(){this.pushBuffer.forEach(e=>e.destroy()),this.pushBuffer=[],this.rejoinTimer.reset(),this.joinPush.destroy(),this.state=T.closed,this.bindings=[]}onClose(e){this.on(E.close,e)}onError(e){return this.on(E.error,t=>e(t))}on(e,t){let n=this.bindingRef++;return this.bindings.push({event:e,ref:n,callback:t}),n}off(e,t){this.bindings=this.bindings.filter(n=>!(n.event===e&&(t===void 0||t===n.ref)))}canPush(){return this.socket.isConnected()&&this.isJoined()}push(e,t,n=this.timeout){if(t||={},!this.joinedOnce)throw Error(`tried to push '${e}' to '${this.topic}' before joining. Use channel.join() before pushing events`);let r=new Ae(this,e,function(){return t},n);return this.canPush()?r.send():(r.startTimeout(),this.pushBuffer.push(r)),r}leave(e=this.timeout){this.rejoinTimer.reset(),this.joinPush.cancelTimeout(),this.state=T.leaving;let t=()=>{this.socket.hasLogger()&&this.socket.log(`channel`,`leave ${this.topic}`),this.trigger(E.close,`leave`)},n=new Ae(this,E.leave,Se({}),e);return n.receive(`ok`,()=>t()).receive(`timeout`,()=>t()),n.send(),this.canPush()||n.trigger(`ok`,{}),n}onMessage(e,t,n){return t}filterBindings(e,t,n){return!0}isMember(e,t,n,r){return this.topic===e?r&&r!==this.joinRef()?(this.socket.hasLogger()&&this.socket.log(`channel`,`dropping outdated message`,{topic:e,event:t,payload:n,joinRef:r}),!1):!0:!1}joinRef(){return this.joinPush.ref}rejoin(e=this.timeout){this.isLeaving()||(this.socket.leaveOpenTopic(this.topic),this.state=T.joining,this.joinPush.resend(e))}trigger(e,t,n,r){let i=this.onMessage(e,t,n,r);if(t&&!i)throw Error(`channel onMessage callbacks must return the payload, modified or unmodified`);let a=this.bindings.filter(r=>r.event===e&&this.filterBindings(r,t,n));for(let e=0;e<a.length;e++)a[e].callback(i,n,r||this.joinRef())}replyEventName(e){return`chan_reply_${e}`}isClosed(){return this.state===T.closed}isErrored(){return this.state===T.errored}isJoined(){return this.state===T.joined}isJoining(){return this.state===T.joining}isLeaving(){return this.state===T.leaving}},Ne=class{static request(e,t,n,r,i,a,o){if(C.XDomainRequest){let n=new C.XDomainRequest;return this.xdomainRequest(n,e,t,r,i,a,o)}else if(C.XMLHttpRequest){let s=new C.XMLHttpRequest;return this.xhrRequest(s,e,t,n,r,i,a,o)}else if(C.fetch&&C.AbortController)return this.fetchRequest(e,t,n,r,i,a,o);else throw Error(`No suitable XMLHttpRequest implementation found`)}static fetchRequest(e,t,n,r,i,a,o){let s={method:e,headers:n,body:r},c=null;return i&&(c=new AbortController,setTimeout(()=>c.abort(),i),s.signal=c.signal),C.fetch(t,s).then(e=>e.text()).then(e=>this.parseJSON(e)).then(e=>o&&o(e)).catch(e=>{e.name===`AbortError`&&a?a():o&&o(null)}),c}static xdomainRequest(e,t,n,r,i,a,o){return e.timeout=i,e.open(t,n),e.onload=()=>{let t=this.parseJSON(e.responseText);o&&o(t)},a&&(e.ontimeout=a),e.onprogress=()=>{},e.send(r),e}static xhrRequest(e,t,n,r,i,a,o,s){e.open(t,n,!0),e.timeout=a;for(let[t,n]of Object.entries(r))e.setRequestHeader(t,n);return e.onerror=()=>s&&s(null),e.onreadystatechange=()=>{e.readyState===Oe.complete&&s&&s(this.parseJSON(e.responseText))},o&&(e.ontimeout=o),e.send(i),e}static parseJSON(e){if(!e||e===``)return null;try{return JSON.parse(e)}catch{return console&&console.log(`failed to parse JSON response`,e),null}}static serialize(e,t){let n=[];for(var r in e){if(!Object.prototype.hasOwnProperty.call(e,r))continue;let i=t?`${t}[${r}]`:r,a=e[r];typeof a==`object`?n.push(this.serialize(a,i)):n.push(encodeURIComponent(i)+`=`+encodeURIComponent(a))}return n.join(`&`)}static appendParams(e,t){return Object.keys(t).length===0?e:`${e}${e.match(/\?/)?`&`:`?`}${this.serialize(t)}`}},Pe=e=>{let t=``,n=new Uint8Array(e),r=n.byteLength;for(let e=0;e<r;e++)t+=String.fromCharCode(n[e]);return btoa(t)},Fe=class{constructor(e,t){t&&t.length===2&&t[1].startsWith(ke)&&(this.authToken=atob(t[1].slice(ke.length))),this.endPoint=null,this.token=null,this.skipHeartbeat=!0,this.reqs=new Set,this.awaitingBatchAck=!1,this.currentBatch=null,this.currentBatchTimer=null,this.batchBuffer=[],this.onopen=function(){},this.onerror=function(){},this.onmessage=function(){},this.onclose=function(){},this.pollEndpoint=this.normalizeEndpoint(e),this.readyState=w.connecting,setTimeout(()=>this.poll(),0)}normalizeEndpoint(e){return e.replace(`ws://`,`http://`).replace(`wss://`,`https://`).replace(RegExp(`(.*)/`+De.websocket),`$1/`+De.longpoll)}endpointURL(){return Ne.appendParams(this.pollEndpoint,{token:this.token})}closeAndRetry(e,t,n){this.close(e,t,n),this.readyState=w.connecting}ontimeout(){this.onerror(`timeout`),this.closeAndRetry(1005,`timeout`,!1)}isActive(){return this.readyState===w.open||this.readyState===w.connecting}poll(){let e={Accept:`application/json`};this.authToken&&(e[`X-Phoenix-AuthToken`]=this.authToken),this.ajax(`GET`,e,null,()=>this.ontimeout(),e=>{if(e){var{status:t,token:n,messages:r}=e;if(t===410&&this.token!==null){this.onerror(410),this.closeAndRetry(3410,`session_gone`,!1);return}this.token=n}else t=0;switch(t){case 200:r.forEach(e=>{setTimeout(()=>this.onmessage({data:e}),0)}),this.poll();break;case 204:this.poll();break;case 410:this.readyState=w.open,this.onopen({}),this.poll();break;case 403:this.onerror(403),this.close(1008,`forbidden`,!1);break;case 0:case 500:this.onerror(500),this.closeAndRetry(1011,`internal server error`,500);break;default:throw Error(`unhandled poll status ${t}`)}})}send(e){typeof e!=`string`&&(e=Pe(e)),this.currentBatch?this.currentBatch.push(e):this.awaitingBatchAck?this.batchBuffer.push(e):(this.currentBatch=[e],this.currentBatchTimer=setTimeout(()=>{this.batchSend(this.currentBatch),this.currentBatch=null},0))}batchSend(e){this.awaitingBatchAck=!0,this.ajax(`POST`,{"Content-Type":`application/x-ndjson`},e.join(`
@@ -196,502 +82,110 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 </script>
 
 <script>
-// ═══════════════════════════════════════════════
-// TASKFLOW APP — G AND G RUBBERS
-// ═══════════════════════════════════════════════
-const SB = supabase.createClient('https://nxxlbrmbdngsaukcckyh.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im54eGxicm1iZG5nc2F1a2Nja3loIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1OTgzOTQsImV4cCI6MjA5NzE3NDM5NH0.aCjtYjPk7H6_YPE7ahz6DsZ-u06Etw6l17f5Ef1lZEw');
-
-let USER = null;
-let PROJECTS = [], TASKS = [], MEMBERS = [];
-let ACTIVE_PROJECT = null;
-let VIEW = 'list';
-let FILTER_STATUS = '', FILTER_PRIORITY = '', FILTER_ASSIGNEE = '', SEARCH = '';
-const COLORS = ['#7F77DD','#1D9E75','#D85A30','#378ADD','#D4537E','#BA7517'];
-const COLOR_NAMES = ['Purple','Teal','Coral','Blue','Pink','Amber'];
-
-// ── PAGES ──────────────────────────────────────
-function showPage(page) {
-  var l = document.getElementById('LOADING');
-  if(l) l.style.display = 'none';
-  document.getElementById('AUTH').style.display = page === 'AUTH' ? 'block' : 'none';
-  document.getElementById('APP').style.display = page === 'APP' ? 'block' : 'none';
-}
-
-// ── BOOT ───────────────────────────────────────
-SB.auth.onAuthStateChange(async (event, session) => {
-  USER = session ? session.user : null;
-  if (USER) {
-    showPage('APP');
-    updateUserBar();
-    await loadData();
-    subscribeRealtime();
-  } else {
-    showPage('AUTH');
-  }
-});
-
-SB.auth.getSession().then(({ data: { session } }) => {
-  if (!session) showPage('AUTH');
-});
-
-// ── AUTH ───────────────────────────────────────
-function switchTab(tab) {
-  document.getElementById('form-in').style.display = tab === 'in' ? '' : 'none';
-  document.getElementById('form-up').style.display = tab === 'up' ? '' : 'none';
-  document.getElementById('tab-in').className = 'tab' + (tab === 'in' ? ' active' : '');
-  document.getElementById('tab-up').className = 'tab' + (tab === 'up' ? ' active' : '');
-  clearMsg();
-}
+var SB = supabase.createClient(
+  'https://nxxlbrmbdngsaukcckyh.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im54eGxicm1iZG5nc2F1a2Nja3loIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1OTgzOTQsImV4cCI6MjA5NzE3NDM5NH0.aCjtYjPk7H6_YPE7ahz6DsZ-u06Etw6l17f5Ef1lZEw'
+);
 
 function showMsg(text, type) {
-  var el = document.getElementById('auth-msg');
+  var el = document.getElementById('msg');
   el.textContent = text;
-  el.className = 'msg-box ' + type;
+  el.className = 'msg ' + type;
 }
 
 function clearMsg() {
-  var el = document.getElementById('auth-msg');
+  var el = document.getElementById('msg');
   el.textContent = '';
-  el.className = 'msg-box';
+  el.className = 'msg';
 }
 
-async function doLogin() {
-  var email = document.getElementById('in-email').value.trim();
-  var pass = document.getElementById('in-pass').value;
-  if (!email || !pass) { showMsg('Please enter your email and password.', 'error'); return; }
-  showMsg('Signing in...', 'success');
-  var result = await SB.auth.signInWithPassword({ email: email, password: pass });
-  if (result.error) { showMsg(result.error.message, 'error'); }
-}
-
-async function doSignup() {
-  var name = document.getElementById('up-name').value.trim();
-  var email = document.getElementById('up-email').value.trim();
-  var pass = document.getElementById('up-pass').value;
-  if (!name || !email || !pass) { showMsg('Please fill in all 3 fields.', 'error'); return; }
-  if (pass.length < 6) { showMsg('Password must be at least 6 characters.', 'error'); return; }
-  showMsg('Creating your account...', 'success');
-  var result = await SB.auth.signUp({ email: email, password: pass, options: { data: { name: name } } });
-  if (result.error) { showMsg(result.error.message, 'error'); return; }
-  showMsg('Account created! You are now being signed in...', 'success');
-}
-
-// ── DATA ───────────────────────────────────────
-async function loadData() {
-  // Show app immediately - never freeze
-  PROJECTS = []; TASKS = []; MEMBERS = [];
-  renderAll();
-  
-  // Then load data in background one by one
-  try {
-    // Step 1: ensure profile exists
-    try {
-      var pr = await Promise.race([
-        SB.from('profiles').select('id').eq('id', USER.id).maybeSingle(),
-        new Promise(function(_, reject) { setTimeout(function() { reject(new Error('timeout')); }, 5000); })
-      ]);
-      if (!pr.data) {
-        await SB.from('profiles').insert([{
-          id: USER.id,
-          name: (USER.user_metadata && USER.user_metadata.name) || USER.email.split('@')[0],
-          email: USER.email
-        }]);
-      }
-    } catch(e) { console.log('Profile step:', e.message); }
-
-    // Step 2: load projects
-    try {
-      var projResult = await Promise.race([
-        SB.from('projects').select('*').order('created_at'),
-        new Promise(function(_, reject) { setTimeout(function() { reject(new Error('timeout')); }, 5000); })
-      ]);
-      PROJECTS = projResult.data || [];
-      if (!ACTIVE_PROJECT && PROJECTS.length > 0) ACTIVE_PROJECT = PROJECTS[0].id;
-      renderAll();
-    } catch(e) { console.log('Projects step:', e.message); }
-
-    // Step 3: load tasks
-    try {
-      var taskResult = await Promise.race([
-        SB.from('tasks').select('*').order('created_at'),
-        new Promise(function(_, reject) { setTimeout(function() { reject(new Error('timeout')); }, 5000); })
-      ]);
-      TASKS = taskResult.data || [];
-      renderAll();
-    } catch(e) { console.log('Tasks step:', e.message); }
-
-    // Step 4: load members
-    try {
-      var membResult = await Promise.race([
-        SB.from('profiles').select('id,name,email'),
-        new Promise(function(_, reject) { setTimeout(function() { reject(new Error('timeout')); }, 5000); })
-      ]);
-      MEMBERS = membResult.data || [];
-      var memberMap = {};
-      MEMBERS.forEach(function(m) { memberMap[m.id] = m; });
-      TASKS = TASKS.map(function(t) {
-        return Object.assign({}, t, { _assignee: memberMap[t.assignee_id] || null });
-      });
-      renderAll();
-    } catch(e) { console.log('Members step:', e.message); }
-
-  } catch(e) {
-    console.error('Load error:', e);
-    renderAll();
+function setLoading(btnId, loading) {
+  var btn = document.getElementById(btnId);
+  if (loading) {
+    btn.innerHTML = '<span class="spinner"></span>Please wait...';
+    btn.disabled = true;
+  } else {
+    btn.disabled = false;
   }
 }
 
-// ── RENDER ALL ─────────────────────────────────
-function renderAll() {
-  renderSidebar();
-  renderStats();
-  renderFilters();
-  renderTasks();
-}
-
-function renderSidebar() {
-  var activeProj = PROJECTS.find(function(p) { return p.id === ACTIVE_PROJECT; });
-  var projItems = PROJECTS.map(function(p) {
-    var count = TASKS.filter(function(t) { return t.project_id === p.id; }).length;
-    var cls = 'nav-btn' + (ACTIVE_PROJECT === p.id ? ' active' : '');
-    return '<div class="' + cls + '" onclick="setProject(\'' + p.id + '\')">' +
-      '<span class="proj-dot" style="background:' + p.color + '"></span>' +
-      '<span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(p.name) + '</span>' +
-      '<span class="nav-count">' + count + '</span></div>';
-  }).join('');
-
-  document.getElementById('sb-nav').innerHTML =
-    '<div class="nav-btn' + (!ACTIVE_PROJECT ? ' active' : '') + '" onclick="setProject(null)">' +
-    '🏠 All tasks<span class="nav-count">' + TASKS.length + '</span></div>' +
-    '<div style="font-size:10px;font-weight:bold;color:#bbb;text-transform:uppercase;letter-spacing:.06em;padding:12px 12px 4px">Projects</div>' +
-    projItems +
-    '<div style="display:flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;font-size:12px;color:#bbb;cursor:pointer" onclick="openProjectModal()" onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background=''">＋ New project</div>';
-
-  document.getElementById('page-title').textContent = activeProj ? activeProj.name : 'All tasks';
-}
-
-function renderStats() {
-  var filtered = ACTIVE_PROJECT ? TASKS.filter(function(t) { return t.project_id === ACTIVE_PROJECT; }) : TASKS;
-  var total = filtered.length;
-  var done = filtered.filter(function(t) { return t.status === 'done'; }).length;
-  var inprog = filtered.filter(function(t) { return t.status === 'progress'; }).length;
-  var overdue = filtered.filter(function(t) { return isOverdue(t.due_date, t.status); }).length;
-  var pct = total ? Math.round(done / total * 100) : 0;
-
-  document.getElementById('stats-row').innerHTML =
-    '<div class="stat-box"><div class="stat-num">' + total + '</div><div class="stat-lbl">Total tasks</div></div>' +
-    '<div class="stat-box"><div class="stat-num" style="color:#1D9E75">' + done + '</div><div class="stat-lbl">Done — ' + pct + '%</div>' +
-    '<div style="height:3px;background:#eee;border-radius:2px;margin-top:6px"><div style="height:100%;width:' + pct + '%;background:#1D9E75;border-radius:2px"></div></div></div>' +
-    '<div class="stat-box"><div class="stat-num" style="color:#7F77DD">' + inprog + '</div><div class="stat-lbl">In progress</div></div>' +
-    '<div class="stat-box"><div class="stat-num" style="' + (overdue ? 'color:#c0392b' : '') + '">' + overdue + '</div><div class="stat-lbl">Overdue</div></div>';
-}
-
-function renderFilters() {
-  var memberOpts = MEMBERS.map(function(m) {
-    return '<option value="' + m.id + '">' + esc(m.name || m.email) + '</option>';
-  }).join('');
-
-  document.getElementById('filter-row').innerHTML =
-    '<input placeholder="Search tasks..." oninput="SEARCH=this.value;renderTasks()" style="flex:1;min-width:120px">' +
-    '<select onchange="FILTER_STATUS=this.value;renderTasks()"><option value="">All status</option><option value="todo">To do</option><option value="progress">In progress</option><option value="done">Done</option><option value="blocked">Blocked</option></select>' +
-    '<select onchange="FILTER_PRIORITY=this.value;renderTasks()"><option value="">All priority</option><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select>' +
-    '<select onchange="FILTER_ASSIGNEE=this.value;renderTasks()"><option value="">All assignees</option>' + memberOpts + '</select>' +
-    '<div class="view-switch"><button class="' + (VIEW==='list'?'active':'') + '" onclick="VIEW='list';renderTasks()">List</button><button class="' + (VIEW==='kanban'?'active':'') + '" onclick="VIEW='kanban';renderTasks()">Board</button></div>';
-}
-
-function getFiltered() {
-  return TASKS.filter(function(t) {
-    if (ACTIVE_PROJECT && t.project_id !== ACTIVE_PROJECT) return false;
-    if (FILTER_STATUS && t.status !== FILTER_STATUS) return false;
-    if (FILTER_PRIORITY && t.priority !== FILTER_PRIORITY) return false;
-    if (FILTER_ASSIGNEE && t.assignee_id !== FILTER_ASSIGNEE) return false;
-    if (SEARCH && t.title.toLowerCase().indexOf(SEARCH.toLowerCase()) === -1) return false;
-    return true;
-  });
-}
-
-function renderTasks() {
-  if (VIEW === 'list') renderListView();
-  else renderKanbanView();
-}
-
-function renderListView() {
-  var list = getFiltered();
-  if (!list.length) {
-    document.getElementById('task-view').innerHTML = '<div class="empty-msg">📋 No tasks yet — click + Add task to get started</div>';
-    return;
-  }
-  var html = '<div class="task-list">';
-  list.forEach(function(t) {
-    var proj = PROJECTS.find(function(p) { return p.id === t.project_id; });
-    var od = isOverdue(t.due_date, t.status);
-    var statusLabels = {todo:'To do',progress:'In progress',done:'Done',blocked:'Blocked'};
-    var aName = t._assignee ? (t._assignee.name || t._assignee.email) : '';
-    html += '<div class="task-item">' +
-      '<div class="task-check' + (t.status==='done'?' done':'') + '" onclick="toggleDone('' + t.id + '','' + t.status + '')">' + (t.status==='done'?'✓':'') + '</div>' +
-      '<div class="task-info">' +
-      '<div class="task-title' + (t.status==='done'?' done':'') + '">' + esc(t.title) + '</div>' +
-      '<div class="task-tags">' +
-      (proj && !ACTIVE_PROJECT ? '<span class="tag" style="background:' + proj.color + '18;color:' + proj.color + '">' + esc(proj.name) + '</span>' : '') +
-      '<span class="tag tag-' + t.status + '">' + (statusLabels[t.status]||t.status) + '</span>' +
-      '<span class="tag tag-' + t.priority + '">' + cap(t.priority) + '</span>' +
-      (t.due_date ? '<span class="tag-info' + (od?' style="color:#c0392b"':'') + '">📅 ' + fmtDate(t.due_date) + (od?' · overdue':'') + '</span>' : '') +
-      (aName ? '<span class="tag-info">👤 ' + esc(aName) + '</span>' : '') +
-      '</div></div>' +
-      '<div class="task-btns">' +
-      '<button onclick="openTaskModal('' + t.id + '')" title="Edit">✏️</button>' +
-      '<button onclick="deleteTask('' + t.id + '')" title="Delete">🗑️</button>' +
-      '</div></div>';
-  });
-  html += '</div>';
-  document.getElementById('task-view').innerHTML = html;
-}
-
-function renderKanbanView() {
-  var list = getFiltered();
-  var cols = [
-    {key:'todo',label:'To do',color:'#378ADD'},
-    {key:'progress',label:'In progress',color:'#7F77DD'},
-    {key:'done',label:'Done',color:'#1D9E75'},
-    {key:'blocked',label:'Blocked',color:'#E24B4A'}
-  ];
-  var html = '<div class="kanban-grid">';
-  cols.forEach(function(col) {
-    var ct = list.filter(function(t) { return t.status === col.key; });
-    html += '<div><div class="k-col-head"><span class="k-col-dot" style="background:' + col.color + '"></span>' + col.label + '<span class="k-col-count">' + ct.length + '</span></div><div class="k-col-body">';
-    if (ct.length === 0) {
-      html += '<div style="font-size:12px;color:#bbb;padding:4px">Empty</div>';
-    } else {
-      ct.forEach(function(t) {
-        var od = isOverdue(t.due_date, t.status);
-        var aName = t._assignee ? (t._assignee.name || t._assignee.email) : '';
-        html += '<div class="k-card" onclick="openTaskModal('' + t.id + '')">' +
-          '<div class="k-card-title">' + esc(t.title) + '</div>' +
-          '<div class="k-card-tags">' +
-          '<span class="tag tag-' + t.priority + '" style="font-size:10px">' + t.priority + '</span>' +
-          (aName ? '<span class="tag" style="font-size:10px;background:#eee;color:#555">' + esc(aName) + '</span>' : '') +
-          (t.due_date ? '<span class="tag-info' + (od?' style="color:#c0392b"':'') + '" style="font-size:10px">📅 ' + fmtDate(t.due_date) + '</span>' : '') +
-          '</div></div>';
-      });
-    }
-    html += '</div></div>';
-  });
-  html += '</div>';
-  document.getElementById('task-view').innerHTML = html;
-}
-
-// ── MODALS ─────────────────────────────────────
-function openTaskModal(taskId) {
-  var task = taskId ? TASKS.find(function(t) { return t.id === taskId; }) : null;
-  var isNew = !task;
-  var projOpts = PROJECTS.map(function(p) {
-    var sel = (task && task.project_id === p.id) || (!task && ACTIVE_PROJECT === p.id) ? ' selected' : '';
-    return '<option value="' + p.id + '"' + sel + '>' + esc(p.name) + '</option>';
-  }).join('');
-  var memberOpts = '<option value="">Unassigned</option>' + MEMBERS.map(function(m) {
-    return '<option value="' + m.id + '"' + (task && task.assignee_id === m.id ? ' selected' : '') + '>' + esc(m.name || m.email) + '</option>';
-  }).join('');
-
-  document.getElementById('modal-root').innerHTML =
-    '<div class="modal-bg" onclick="if(event.target===this)closeModal()">' +
-    '<div class="modal-box">' +
-    '<div class="modal-hdr"><h3>' + (isNew?'New task':'Edit task') + '</h3><button class="modal-close" onclick="closeModal()">✕</button></div>' +
-    '<div class="field"><label>Task title</label><input id="m-title" value="' + esc(task?task.title:'') + '" placeholder="What needs to be done?"></div>' +
-    '<div class="field"><label>Project</label><select id="m-proj">' + projOpts + '</select></div>' +
-    '<div class="g2">' +
-    '<div class="field"><label>Status</label><select id="m-status">' +
-    '<option value="todo"' + (task&&task.status==='todo'?' selected':'') + '>To do</option>' +
-    '<option value="progress"' + (task&&task.status==='progress'?' selected':'') + '>In progress</option>' +
-    '<option value="done"' + (task&&task.status==='done'?' selected':'') + '>Done</option>' +
-    '<option value="blocked"' + (task&&task.status==='blocked'?' selected':'') + '>Blocked</option>' +
-    '</select></div>' +
-    '<div class="field"><label>Priority</label><select id="m-priority">' +
-    '<option value="low"' + (task&&task.priority==='low'?' selected':'') + '>Low</option>' +
-    '<option value="medium"' + (!task||task.priority==='medium'?' selected':'') + '>Medium</option>' +
-    '<option value="high"' + (task&&task.priority==='high'?' selected':'') + '>High</option>' +
-    '</select></div></div>' +
-    '<div class="g2">' +
-    '<div class="field"><label>Assignee</label><select id="m-assignee">' + memberOpts + '</select></div>' +
-    '<div class="field"><label>Due date</label><input type="date" id="m-due" value="' + (task&&task.due_date?task.due_date:'') + '"></div>' +
-    '</div>' +
-    '<div class="field"><label>Notes</label><textarea id="m-notes">' + esc(task?task.notes||'':'') + '</textarea></div>' +
-    (!isNew ? '<div style="margin-bottom:10px"><button onclick="deleteTask('' + task.id + '')" style="padding:7px 14px;border-radius:8px;font-size:13px;cursor:pointer;border:none;background:#FCEBEB;color:#c0392b;font-family:Arial">🗑️ Delete task</button></div>' : '') +
-    '<div class="modal-ftr"><button onclick="closeModal()">Cancel</button><button class="save" onclick="saveTask(' + (task?'''+task.id+''':'null') + ')">✓ ' + (isNew?'Add task':'Save changes') + '</button></div>' +
-    '</div></div>';
-}
-
-function openProjectModal() {
-  var colorOpts = COLORS.map(function(c, i) {
-    return '<option value="' + c + '">' + COLOR_NAMES[i] + '</option>';
-  }).join('');
-  document.getElementById('modal-root').innerHTML =
-    '<div class="modal-bg" onclick="if(event.target===this)closeModal()">' +
-    '<div class="modal-box" style="max-width:360px">' +
-    '<div class="modal-hdr"><h3>New project</h3><button class="modal-close" onclick="closeModal()">✕</button></div>' +
-    '<div class="field"><label>Project name</label><input id="p-name" placeholder="e.g. Tapping Schedule"></div>' +
-    '<div class="field"><label>Colour</label><select id="p-color">' + colorOpts + '</select></div>' +
-    '<div class="modal-ftr"><button onclick="closeModal()">Cancel</button><button class="save" onclick="saveProject()">＋ Create project</button></div>' +
-    '</div></div>';
-}
-
-function showUserMenu() {
-  document.getElementById('modal-root').innerHTML =
-    '<div class="modal-bg" onclick="if(event.target===this)closeModal()">' +
-    '<div class="modal-box" style="max-width:300px">' +
-    '<div class="modal-hdr"><h3>My account</h3><button class="modal-close" onclick="closeModal()">✕</button></div>' +
-    '<div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #eee;margin-bottom:14px">' +
-    '<div class="avatar" style="width:40px;height:40px;font-size:16px">' + getInitial() + '</div>' +
-    '<div><div style="font-weight:bold;font-size:14px">' + esc(getName()) + '</div><div style="font-size:12px;color:#aaa">' + esc(USER?USER.email:'') + '</div></div></div>' +
-    '<button onclick="doSignout()" style="width:100%;padding:10px;border-radius:8px;font-size:13px;cursor:pointer;border:none;background:#FCEBEB;color:#c0392b;font-family:Arial;font-weight:bold">Sign out</button>' +
-    '</div></div>';
-}
-
-function closeModal() {
-  document.getElementById('modal-root').innerHTML = '';
-}
-
-// ── CRUD ───────────────────────────────────────
-async function saveTask(existingId) {
-  var title = document.getElementById('m-title').value.trim();
-  if (!title) { toast('Please enter a task title'); return; }
-  var payload = {
-    title: title,
-    project_id: document.getElementById('m-proj').value,
-    status: document.getElementById('m-status').value || 'todo',
-    priority: document.getElementById('m-priority').value || 'medium',
-    assignee_id: document.getElementById('m-assignee').value || null,
-    due_date: document.getElementById('m-due').value || null,
-    notes: document.getElementById('m-notes').value || ''
-  };
-  try {
-    if (existingId) {
-      var r = await SB.from('tasks').update(Object.assign({}, payload, {updated_at: new Date().toISOString()})).eq('id', existingId).select().single();
-      if (r.error) throw r.error;
-      var memberMap = {};
-      MEMBERS.forEach(function(m) { memberMap[m.id] = m; });
-      var idx = TASKS.findIndex(function(t) { return t.id === existingId; });
-      if (idx >= 0) TASKS[idx] = Object.assign({}, TASKS[idx], r.data, {_assignee: memberMap[r.data.assignee_id] || null});
-      toast('Task saved ✓');
-    } else {
-      var r = await SB.from('tasks').insert([Object.assign({}, payload, {created_by: USER.id})]).select().single();
-      if (r.error) throw r.error;
-      var memberMap = {};
-      MEMBERS.forEach(function(m) { memberMap[m.id] = m; });
-      TASKS.push(Object.assign({}, r.data, {_assignee: memberMap[r.data.assignee_id] || null}));
-      toast('Task added ✓');
-    }
-    closeModal();
-    renderAll();
-  } catch(e) { toast('Error: ' + e.message); console.error(e); }
-}
-
-async function toggleDone(id, status) {
-  var newStatus = status === 'done' ? 'todo' : 'done';
-  var r = await SB.from('tasks').update({status: newStatus, updated_at: new Date().toISOString()}).eq('id', id).select().single();
-  if (r.error) { toast('Error: ' + r.error.message); return; }
-  var idx = TASKS.findIndex(function(t) { return t.id === id; });
-  if (idx >= 0) TASKS[idx] = Object.assign({}, TASKS[idx], r.data);
-  renderAll();
-}
-
-async function deleteTask(id) {
-  if (!confirm('Delete this task? This cannot be undone.')) return;
-  var r = await SB.from('tasks').delete().eq('id', id);
-  if (r.error) { toast('Error: ' + r.error.message); return; }
-  TASKS = TASKS.filter(function(t) { return t.id !== id; });
-  closeModal();
-  renderAll();
-  toast('Task deleted');
-}
-
-async function saveProject() {
-  var name = document.getElementById('p-name').value.trim();
-  var color = document.getElementById('p-color').value || '#7F77DD';
-  if (!name) { toast('Please enter a project name'); return; }
-  var r = await SB.from('projects').insert([{name: name, color: color, owner_id: USER.id}]).select().single();
-  if (r.error) { toast('Error: ' + r.error.message); return; }
-  PROJECTS.push(r.data);
-  ACTIVE_PROJECT = r.data.id;
-  closeModal();
-  renderAll();
-  toast('Project created ✓');
-}
-
-async function doSignout() {
-  closeModal();
-  await SB.auth.signOut();
-  toast('Signed out');
-}
-
-function subscribeRealtime() {
-  SB.channel('realtime-changes')
-    .on('postgres_changes', {event: '*', schema: 'public', table: 'tasks'}, loadData)
-    .on('postgres_changes', {event: '*', schema: 'public', table: 'projects'}, loadData)
-    .subscribe();
-}
-
-// ── CSV ────────────────────────────────────────
-function exportCSV() {
-  var list = getFiltered();
-  if (!list.length) { toast('No tasks to export'); return; }
-  var header = ['Title','Project','Status','Priority','Assignee','Due Date','Notes'];
-  var rows = list.map(function(t) {
-    return [
-      t.title,
-      (PROJECTS.find(function(p) { return p.id === t.project_id; }) || {}).name || '',
-      t.status, t.priority,
-      t._assignee ? (t._assignee.name || t._assignee.email) : '',
-      t.due_date || '', t.notes || ''
-    ].map(function(v) { return '"' + String(v).replace(/"/g, '""') + '"'; });
-  });
-  var csv = [header].concat(rows).map(function(r) { return r.join(','); }).join('\n');
-  var a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([csv], {type: 'text/csv'}));
-  a.download = 'GGRubbers-tasks-' + new Date().toISOString().slice(0,10) + '.csv';
-  a.click();
-  toast('CSV downloaded');
-}
-
-// ── HELPERS ────────────────────────────────────
-function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-function cap(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : ''; }
-function fmtDate(d) { if (!d) return ''; return new Date(d).toLocaleDateString('en-GB', {day:'numeric',month:'short'}); }
-function isOverdue(due, status) { return due && status !== 'done' && new Date(due) < new Date(new Date().toDateString()); }
-function getName() { return USER && USER.user_metadata && USER.user_metadata.name ? USER.user_metadata.name : (USER ? USER.email.split('@')[0] : ''); }
-function getInitial() { return getName().charAt(0).toUpperCase() || '?'; }
-function setProject(id) { ACTIVE_PROJECT = id; renderAll(); }
-function updateUserBar() {
-  document.getElementById('user-avatar').textContent = getInitial();
-  document.getElementById('user-name').textContent = getName();
-  document.getElementById('user-email').textContent = USER ? USER.email : '';
-}
-function toast(msg) {
-  var el = document.createElement('div');
-  el.className = 'toast-msg';
-  el.textContent = msg;
-  document.getElementById('toast-area').appendChild(el);
-  setTimeout(function() { el.remove(); }, 3000);
-}
-// Tab click handlers - avoid inline onclick quote issues
-document.addEventListener('DOMContentLoaded', function() {
-  var tabIn = document.getElementById('tab-in');
-  var tabUp = document.getElementById('tab-up');
-  var btnIn = document.getElementById('in-btn');
-  var btnUp = document.getElementById('up-btn');
-  
-  if(tabIn) tabIn.addEventListener('click', function() { switchTab('in'); });
-  if(tabUp) tabUp.addEventListener('click', function() { switchTab('up'); });
-  if(btnIn) btnIn.addEventListener('click', function() { doLogin(); });
-  if(btnUp) btnUp.addEventListener('click', function() { doSignup(); });
+// Tab switching
+document.getElementById('tab-signin').addEventListener('click', function() {
+  document.getElementById('tab-signin').className = 'tab active';
+  document.getElementById('tab-create').className = 'tab';
+  document.getElementById('signin-form').style.display = '';
+  document.getElementById('create-form').style.display = 'none';
+  clearMsg();
 });
 
+document.getElementById('tab-create').addEventListener('click', function() {
+  document.getElementById('tab-signin').className = 'tab';
+  document.getElementById('tab-create').className = 'tab active';
+  document.getElementById('signin-form').style.display = 'none';
+  document.getElementById('create-form').style.display = '';
+  clearMsg();
+});
+
+// Sign in
+document.getElementById('signin-btn').addEventListener('click', function() {
+  var email = document.getElementById('signin-email').value.trim();
+  var password = document.getElementById('signin-password').value;
+  if (!email || !password) { showMsg('Please enter email and password', 'err'); return; }
+  setLoading('signin-btn', true);
+  showMsg('Signing in...', 'ok');
+  SB.auth.signInWithPassword({ email: email, password: password })
+    .then(function(result) {
+      if (result.error) {
+        showMsg(result.error.message, 'err');
+        document.getElementById('signin-btn').innerHTML = 'Sign in';
+        document.getElementById('signin-btn').disabled = false;
+      } else {
+        showMsg('Signed in! Opening your workspace...', 'ok');
+        window.location.href = 'https://gmanojnair2002.github.io/GG-Rubbers/app.html';
+      }
+    })
+    .catch(function(err) {
+      showMsg('Error: ' + err.message, 'err');
+      document.getElementById('signin-btn').innerHTML = 'Sign in';
+      document.getElementById('signin-btn').disabled = false;
+    });
+});
+
+// Create account
+document.getElementById('create-btn').addEventListener('click', function() {
+  var name = document.getElementById('create-name').value.trim();
+  var email = document.getElementById('create-email').value.trim();
+  var password = document.getElementById('create-password').value;
+  if (!name || !email || !password) { showMsg('Please fill in all 3 fields', 'err'); return; }
+  if (password.length < 6) { showMsg('Password must be at least 6 characters', 'err'); return; }
+  setLoading('create-btn', true);
+  showMsg('Creating your account...', 'ok');
+  SB.auth.signUp({ email: email, password: password, options: { data: { name: name } } })
+    .then(function(result) {
+      if (result.error) {
+        showMsg(result.error.message, 'err');
+        document.getElementById('create-btn').innerHTML = 'Create account';
+        document.getElementById('create-btn').disabled = false;
+      } else {
+        showMsg('Account created! You are now signed in. Opening workspace...', 'ok');
+        setTimeout(function() {
+          window.location.href = 'https://gmanojnair2002.github.io/GG-Rubbers/app.html';
+        }, 1500);
+      }
+    })
+    .catch(function(err) {
+      showMsg('Error: ' + err.message, 'err');
+      document.getElementById('create-btn').innerHTML = 'Create account';
+      document.getElementById('create-btn').disabled = false;
+    });
+});
+
+// Enter key support
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') {
-    var fin = document.getElementById('form-in');
-    var fup = document.getElementById('form-up');
-    if (fin && fin.style.display !== 'none') doLogin();
-    else if (fup && fup.style.display !== 'none') doSignup();
-  }
+  if (e.key !== 'Enter') return;
+  var signinVisible = document.getElementById('signin-form').style.display !== 'none';
+  if (signinVisible) document.getElementById('signin-btn').click();
+  else document.getElementById('create-btn').click();
 });
 </script>
 </body>
